@@ -1,0 +1,166 @@
+h1{
+  background-color: rgba(0, 0, 0, 0.7);
+  text-align: center;
+  color: white;
+  font-weight: 700;
+  padding: 0.25em;
+  margin-top: 2em;
+  font-size: 1.8rem;
+}
+
+div.contenedor-inicial{
+  background-color: rgba(255, 255, 255, 0.651);
+  margin: 5em auto;
+  border-radius: 7px;
+  width: 90%;
+  max-width: 350px;
+  padding: 1em;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.contenedor-inicial div p {
+  text-align: center;
+  padding: 0.5em;
+  margin: 0.5em;
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  word-wrap: break-word;
+}
+
+div.contenedor-inicial div p:hover{
+  color: var(--secondary-color);
+  cursor: pointer;
+}
+
+div.loginBox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div.buttons{
+  margin: 2em auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+}
+button, input[type=submit]{
+  width: 45%;
+  margin: 0;
+  font-size: 0.8rem;
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 7px;
+  border: none;
+  box-shadow: 0px 10px 14px -7px #000000;
+  transition: background-color ease-in-out 200ms;
+  cursor: pointer;
+}
+
+button:hover, button:focus{
+  background-color: var(--primary-color-hover);
+
+  
+}
+
+input[type=submit]:hover, input[type=submit]:focus{
+  background-color: var(--secondary-color-hover);
+
+ 
+}
+
+button:active, input[type=submit]:active{
+  position: relative;
+  top: 1px;
+  box-shadow: 0px 9px 14px -8px #000000;
+}
+
+button {
+  background-color: var(--primary-color);
+}
+
+input[type=submit]{
+  background-color: var(--secondary-color);
+  margin-top: 2em;
+}
+
+input[type=submit].submit-off, input[type=submit].submit-off:hover, input[type=submit].submit-off:focus, input[type=submit].submit-off:active{
+  background-color: var(--secondary-color);
+  position: static;
+  box-shadow: 0px 10px 14px -7px #000000;
+  cursor: default;
+  opacity: 0.5;
+
+}
+
+div.contenedor-inicial div p.noHover:hover{
+  color: inherit;
+  cursor: default;
+}
+
+
+label {
+  color: var(--neutral-color);
+  display: block;
+}
+
+input, label{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.contenedor-inicial div.form-group p.text-danger{
+  font-size: 1rem;
+  width: 80%;
+  margin: auto;
+  text-align: left;
+}
+
+
+@media(min-width:440px){
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  div.contenedor-inicial div p{
+    font-size: 2.2rem;
+  }
+  div.buttons{
+   flex-direction: row;
+  }
+  input[type=submit]{
+    margin-top: 0;
+  }
+
+  @media(min-width:1500px){
+    h1{
+      font-size: 3.5rem;
+      margin-top: 1em;
+    }
+
+    div.contenedor-inicial{
+      max-width: 450px;
+    }
+
+    div.contenedor-inicial div{
+      width: 80%;
+    }
+
+    div.contenedor-inicial div form div {
+      width: 100%;
+    }
+  
+    div.contenedor-inicial div p{
+      font-size: 2.5rem;
+    }
+
+    button, input[type=submit]{
+      font-size: 1.2rem;
+    }
+  }
+}
+

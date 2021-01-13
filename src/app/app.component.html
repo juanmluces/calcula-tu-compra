@@ -1,1 +1,28 @@
-<router-outlet></router-outlet>
+<div #wrapper>
+  <nav [@inAnimation] *ngIf="showNav">
+    <div routerLink="/inicio" class="logo-container">
+      <img #logo src="{{logoUrl}}" alt="Coding Lights">
+    </div>
+    <ul [@navBarAnimate] (click)="closeNavbarMobile()" *ngIf="showMobileNav" class="nav-links">
+      <li routerLink="/categorias" (click)="closeNavbarMobile()" routerLinkActive="active">Categorías</li>
+      <li routerLink="/productos" (click)="closeNavbarMobile()" routerLinkActive="active">Productos</li>
+      <li (click)="closeNavbarMobile()">Mi Lista</li>
+      <li (click)="closeNavbarMobile()">Perfil</li>
+      <li (click)="closeNavbarMobile()">Conóceme</li>
+    </ul>
+    <ul class="nav-list">
+      <li class="list-logo">
+        <fa-icon [icon]="faListAlt"></fa-icon>
+      </li>
+    </ul>
+    <div class="nav-hamburguer-container">
+      <div (click)="displayNavMenu($event)" class="nav-hamburguer">
+        <div #navBurguer class="hamburguer-bar"></div>
+      </div>
+    </div>
+  </nav>
+  <main [@routerAnimations]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </main>
+
+</div>

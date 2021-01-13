@@ -1,0 +1,63 @@
+<h1>Calcula Tu Compra!</h1>
+
+
+<div class="contenedor-inicial">
+  <div [@inAnimation] *ngIf="homeBox">
+    <p (click)="onIniciaSesion()">Inicia sesión</p>
+    <p (click)="onSingUp()">Regístrate</p>
+    <p routerLink="/categorias">Continuar</p>
+
+  </div>
+  <div [@inAnimation] *ngIf="loginBox">
+    <p class="noHover">Inicia sesión</p>
+    <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="form">
+      <div class="form-group">
+        <label>Usuario (email)</label>
+        <input type="email" class="form-control" formControlName="username">
+        <p class="text-danger" *ngIf="loginForm.get('username').hasError('required') && loginForm.get('username').touched">*Éste campo es
+          requerido</p>
+        <p class="text-danger" *ngIf="loginForm.get('username').hasError('email') && loginForm.get('username').touched">*Introduce un
+          email
+          válido</p>
+      </div>
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" class="form-control" formControlName="password">
+        <p class="text-danger" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">*Éste campo es
+          requerido</p>
+      </div>
+      <div class="buttons">
+        <button (click)="onVolver($event)">Volver</button>
+        <input type="submit" value="Iniciar sesión" [ngClass]="{'submit-off': !loginForm.valid}" btn-block btn-success [disabled]="!loginForm.valid">
+      </div>
+    </form>
+
+  </div>
+  <div [@inAnimation] *ngIf="signUpBox">
+    <p class="noHover">Regístrate</p>
+    <form [formGroup]="signUpForm" (ngSubmit)="onSignUpSubmit()" class="form">
+      <div class="form-group">
+        <label>Usuario (email)</label>
+        <input type="email" class="form-control" formControlName="username">
+        <p class="text-danger" *ngIf="signUpForm.get('username').hasError('required') && signUpForm.get('username').touched">*Éste campo es
+          requerido</p>
+        <p class="text-danger" *ngIf="signUpForm.get('username').hasError('email') && signUpForm.get('username').touched">*Introduce un
+          email
+          válido</p>
+      </div>
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" class="form-control" formControlName="password">
+        <p class="text-danger" *ngIf="signUpForm.get('password').hasError('required') && signUpForm.get('password').touched">*Éste campo es
+          requerido</p>
+        <p class="text-danger" *ngIf="signUpForm.get('password').hasError('minlength') && signUpForm.get('password').touched">*La contraseña
+          debe ser de al menos 4 caracteres</p>
+      </div>
+      <div class="buttons">
+        <button (click)="onVolver($event)">Volver</button>
+        <input type="submit" value="Iniciar sesión" [ngClass]="{'submit-off': !signUpForm.valid}" btn-block btn-success [disabled]="!signUpForm.valid">
+      </div>
+    </form>
+
+  </div>
+</div>
