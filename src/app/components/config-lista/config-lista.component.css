@@ -4,6 +4,9 @@ div.container-list{
   margin: 2em auto;
   max-width: 600px;
   padding: 1em 0.5em 2em;
+  -webkit-box-shadow: 5px 5px 25px 3px rgba(0,0,0,0.75);
+  -moz-box-shadow: 5px 5px 25px 3px rgba(0,0,0,0.75);
+  box-shadow: 5px 5px 25px 3px rgba(0,0,0,0.75);
 }
 
 @media(max-width: 400px){
@@ -26,8 +29,10 @@ div.container-list hr{
 
 .lista-productos ul{
   display: flex;
-  padding: 1em;
+  padding: 1em 0;
   flex-direction: column;
+  width: 80%;
+  margin: auto;
 }
 
 .lista-productos ul li{
@@ -43,11 +48,22 @@ div.container-list hr{
   margin: 0 0.25rem;
 }
 
+.lista-productos ul li fa-icon.delete-element{
+  cursor: pointer;
+  transition: opacity ease-in-out 150ms;
+}
+.lista-productos ul li fa-icon.delete-element:hover{
+  opacity: 0.5;
+}
+
 span.nombre-producto{
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: 50%;
+  cursor: pointer;
+
 }
 
 div.div-total, div.div-presupuesto, div.div-resultado{
@@ -76,7 +92,56 @@ div.div-total div:first-child, div.div-presupuesto div:first-child, div.div-resu
 }
 
 div.container-list button{
-  margin: 2em auto;
+  margin: 1em auto;
   width: unset;
+  height: 2rem;
 }
 
+div.container-list div.footer input{
+width: 100%;
+max-width: 150px;
+}
+
+div.footer{
+  display: flex;
+flex-wrap: wrap;
+align-content: center;
+align-items: center;
+}
+
+div.footer-control{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding-top: 1em;
+  width: 100%;
+}
+
+div.button-container{
+  width: 100%;
+}
+
+ngb-alert.success-alert{
+  max-width: 500px;
+  margin: auto;
+  top: 1em;
+}
+
+@media(min-width: 520px){
+  div.footer-control{
+    width: 50%;
+  }
+  div.button-container{
+    width: 50%;
+  }
+}
+
+div.footer-control .nombre-lista, div.footer-control .presupuesto-lista{
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ padding-bottom: 1em;
+
+}

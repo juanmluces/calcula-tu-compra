@@ -29,6 +29,7 @@ export class ProductsComponent implements OnInit {
     this.category = "Todos los productos"
     /* Placeholder array */
     this.products = [{
+      "id": 1,
       "marca": "Hacendado",
       "nombre": "Bacon taquitos",
       "imagen": "https://a2.soysuper.com/2ead27424e55902df72c266ab9b47629.340.340.0.min.wmark.796266d1.jpg",
@@ -37,6 +38,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
+      "id": 2,
       "marca": "Hacendado",
       "nombre": "Fuet espetec extra",
       "imagen": "https://a1.soysuper.com/1fb3977901e45a47c482ec3fbe69a541.340.340.0.min.wmark.06f2f5fb.jpg",
@@ -45,6 +47,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
+      "id": 1,
       "marca": "Hacendado",
       "nombre": "Queso rallado hilos pizza (mozzarella)",
       "imagen": "https://a1.soysuper.com/dd7d2add51ede354c96c245e15a446cc.340.340.0.min.wmark.cbec57f5.jpg",
@@ -53,6 +56,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
+      "id": 1,
       "marca": "Hacendado",
       "nombre": "Queso rallado hilos 4 variedades (emental-cheddar-gouda-curado) fundir y gratinar",
       "imagen": "https://a1.soysuper.com/1187328ec5916cda6c96e6faedbb3379.340.340.0.min.wmark.0b7441ac.jpg",
@@ -61,6 +65,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
+      "id": 1,
       "marca": "Hacendado",
       "nombre": "Jamon cocido extra lonchas finas",
       "imagen": "https://a2.soysuper.com/038ae6dfadb153139dd66b8708c378da.340.340.0.min.wmark.e3d156d1.jpg",
@@ -69,6 +74,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
+      "id": 1,
       "marca": "Hacendado",
       "nombre": "Salchicha frankfurt 7 U",
       "imagen": "https://a1.soysuper.com/12bea20d1ec4853f9dc8a2520d3b5ff1.340.340.0.min.wmark.e6f4e4a4.jpg",
@@ -77,6 +83,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
+      "id": 1,
       "marca": "Hacendado",
       "nombre": "Queso barra havarti en lonchas",
       "imagen": "https://a1.soysuper.com/6a6ec66010bffc367ff210fe96118fc4.340.340.0.min.wmark.4d45f188.jpg",
@@ -85,6 +92,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
+      "id": 1,
       "marca": "Hacendado",
       "nombre": "Fiambre pechuga pavo lonchas finas",
       "imagen": "https://a2.soysuper.com/22e978f4243d214753fa3ba11b830c03.340.340.0.min.wmark.967fe2fa.jpg",
@@ -93,6 +101,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
+      "id": 1,
       "marca": "Hacendado",
       "nombre": "Guacamole",
       "imagen": "https://a2.soysuper.com/676056e8b4966db2c231e89ce25c4e11.340.340.0.min.wmark.3315f91d.jpg",

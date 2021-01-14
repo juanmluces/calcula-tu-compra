@@ -54,6 +54,19 @@ export const ngIfAnimate = [
   )
 ];
 
+/* bootstrap alert in animation */
+export const bootstrapAnimateAlert = [
+  trigger(
+    'bsInAnimation', [
+    transition(':enter', [
+      style({ opacity: 0 }),
+      animate('150ms ease-out',
+        style({ opacity: 1 }))
+    ]),
+  ]
+  )
+]
+
 export const navbarAnimation = [
   trigger('navBarAnimate', [
     transition(':enter', [

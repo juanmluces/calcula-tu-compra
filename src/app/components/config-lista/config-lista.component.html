@@ -1,47 +1,50 @@
 <div class="dark-layer">
   <div class="wrapper">
+    <ngb-alert [@bsInAnimation] class="success-alert" #selfClosingAlert *ngIf="successMessage" type="success" (closed)="successMessage = ''">{{ successMessage }}
+    </ngb-alert>
 
     <div class="container-list">
-      <h3>Mi Lista</h3>
+      <h3 *ngIf="nombreLista">{{nombreLista}}</h3>
+      <h3 *ngIf="!nombreLista">Mi Lista</h3>
       <hr>
       <div class="lista-productos">
         <ul>
-          <li>
-            <fa-icon class="text-danger" [icon]="faTrashAlt"></fa-icon>
-            <span placement="top" ngbTooltip="Nombre del producto" triggers="click:blur hover" class="nombre-producto">Nombre del producto</span>
-            <fa-icon class="text-warning" [icon]="faMinus"></fa-icon>
-            <span>x03</span>
-            <span>05.99€</span>
-          </li>
-          <li>
-            <fa-icon class="text-danger" [icon]="faTrashAlt"></fa-icon>
-            <span placement="top" ngbTooltip="Nombre del producto" triggers="click:blur hover" class="nombre-producto">Nombre del producto</span>
-            <fa-icon class="text-warning" [icon]="faMinus"></fa-icon>
-            <span>x03</span>
-            <span>05.99€</span>
-          </li>
-          <li>
-            <fa-icon class="text-danger" [icon]="faTrashAlt"></fa-icon>
-            <span placement="top" ngbTooltip="Nombre del producto" triggers="click:blur hover" class="nombre-producto">Nombre del producto</span>
-            <fa-icon class="text-warning" [icon]="faMinus"></fa-icon>
-            <span>x03</span>
-            <span>05.99€</span>
+          <li *ngFor="let product of productsInList">
+            <fa-icon (click)="deleteElement(product)" class="text-danger delete-element" [icon]="faTrashAlt"></fa-icon>
+            <span placement="top" [ngbTooltip]="product.nombre" triggers="click:blur hover" class="nombre-producto">{{product.nombre}}</span>
+            <fa-icon (click)="minusOneElement(product)" class="text-warning delete-element" [icon]="faMinus"></fa-icon>
+            <span>x{{product.cantidad}}</span>
+            <span>{{product.cantidad * product.precio |number:'.2'}}€</span>
           </li>
         </ul>
       </div>
       <div class="div-total">
         <div>TOTAL</div>
-        <div>90€</div>
+        <div>{{total | number:'.0-2'}}€</div>
       </div>
       <div class="div-presupuesto">
         <div>Presupuesto</div>
-        <div>100€</div>
+        <div>{{presupuesto | number:'.0-2'}}€</div>
       </div>
       <div class="div-resultado">
         <div>Gasto</div>
-        <div>10€</div>
+        <div *ngIf="presupuesto" [ngClass]="{'text-danger': presupuesto < total, 'text-success': presupuesto > total}">{{presupuesto - total | number:'.0-2'}}€</div>
       </div>
-      <button class="btn btn-primary">Guardar Lista</button>
+      <div class="footer">
+        <div class="footer-control">
+          <div class="nombre-lista">
+            <label>Nombre de Lista</label>
+            <input [(ngModel)]="nombreLista" type="text">
+          </div>
+          <div class="presupuesto-lista">
+            <label>Establece presupuesto</label>
+            <input [(ngModel)]="presupuesto" step="0.01" type="number">
+          </div>
+        </div>
+        <div class="button-container">
+          <button (click)="onGuardarLista()" class="guardar-button btn btn-primary">Guardar Lista</button>
+        </div>
+      </div>
     </div>
 
   </div>
