@@ -1,0 +1,82 @@
+div.container-list{
+  background-color: whitesmoke;
+  width: 80%;
+  margin: 2em auto;
+  max-width: 600px;
+  padding: 1em 0.5em 2em;
+}
+
+@media(max-width: 400px){
+  div.container-list{
+    width: 95%;
+  }
+}
+
+div.container-list h3{
+  text-align: center;
+  margin: auto;
+  padding: 0.25em;
+}
+
+div.container-list hr{
+  margin: 0.5rem auto;
+  border-top: 0.25rem solid var(--neutral-color);
+  width: 80%;
+}
+
+.lista-productos ul{
+  display: flex;
+  padding: 1em;
+  flex-direction: column;
+}
+
+.lista-productos ul li{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+
+}
+
+.lista-productos ul li fa-icon,
+.lista-productos ul li span{
+  margin: 0 0.25rem;
+}
+
+span.nombre-producto{
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.div-total, div.div-presupuesto, div.div-resultado{
+  border-top: 0.25rem solid var(--neutral-color);
+  border-bottom: 0.25rem solid var(--neutral-color);
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: auto;
+  padding: 0 5%;
+}
+
+div.div-presupuesto, div.div-resultado{
+  border-top: 0;
+}
+
+div.div-total div, div.div-presupuesto div, div.div-resultado div{
+  font-size: 1.2rem;
+  padding: 0.25em;
+  font-weight: 700;
+
+}
+div.div-total div:first-child, div.div-presupuesto div:first-child, div.div-resultado div:first-child{
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.container-list button{
+  margin: 2em auto;
+  width: unset;
+}
+

@@ -1,1 +1,29 @@
-<p>products works!</p>
+<div class="dark-layer">
+  <div class="wrapper">
+
+    <h2 routerLink="/categorias" class="titulo">{{category}}</h2>
+    <div class="search-box">
+      <input class="search-box-input" type="search" (input)="search()" [(ngModel)]="searchText" />
+      <div *ngIf="!searchText" class="search-box-placeholder-wrapper">
+        <fa-icon [icon]="faSearch" class="search-box-placeholder"></fa-icon>
+        <span>&nbsp;Busca un producto</span>
+      </div>
+    </div>
+    <div #panel class="products-container" (scroll)="onScroll($event)">
+      <app-scroll-to-top [@inAnimation] (click)="scrollTop()" *ngIf="scrollPosition"></app-scroll-to-top>
+      <div *ngFor="let product of products" class="product-card">
+        <div class="img-container">
+          <img [src]="product.imagen" [alt]="product.nombre">
+          <div class="price-tag">
+            <p>{{product.precio}}€</p>
+          </div>
+        </div>
+        <div class="product-texts">
+          <p>{{product.marca}}</p>
+          <p>{{product.nombre}}</p>
+          <p>{{product.descripcion}}</p>
+        </div>
+        <button class="btn btn-info">Añadir</button>
+      </div>
+    </div>
+  </div>

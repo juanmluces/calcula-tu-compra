@@ -1,6 +1,6 @@
 div.contenedor{
   display: flex;
-  height: calc(100vh - 4rem);
+  height: calc(100vh - 4.1rem);
   flex-wrap: wrap;
   justify-content: space-between;
   width: 80%;
@@ -26,6 +26,7 @@ div.contenedor-categorias{
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
   padding-top: 2em;
+  padding-bottom: 2em;
 }
 
 div.contenedor-categorias ul{
@@ -37,7 +38,7 @@ div.contenedor-categorias ul li{
  font-size: 1.8rem;
  font-weight: 700;
  padding: 0.5em;
- padding-left: 2em;
+ text-align: center;
  color: var(--primary-color);
  cursor: pointer;
 }
@@ -93,4 +94,5 @@ div.contenedor{
   div.contenedor-categorias ul li{
     padding-left: 0.5em;
   }
+  
 }

@@ -2,10 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { fade } from 'src/app/animations/animations';
 import { NavbarService } from 'src/app/services/navbar.service';
 
-import {
-  PerfectScrollbarConfigInterface,
-  PERFECT_SCROLLBAR_CONFIG
-} from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {

@@ -11,6 +11,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CategoriasComponent } from './components/categorias/categorias.component';
 import { ProductsComponent } from './products/products.component';
 import { PerfectScrollbarModule, } from 'ngx-perfect-scrollbar';
+import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
+import { ConfigListaComponent } from './components/config-lista/config-lista.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -19,7 +22,9 @@ import { PerfectScrollbarModule, } from 'ngx-perfect-scrollbar';
     AppComponent,
     InicioComponent,
     CategoriasComponent,
-    ProductsComponent
+    ProductsComponent,
+    ScrollToTopComponent,
+    ConfigListaComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +33,8 @@ import { PerfectScrollbarModule, } from 'ngx-perfect-scrollbar';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
