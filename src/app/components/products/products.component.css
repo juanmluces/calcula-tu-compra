@@ -66,6 +66,7 @@ h2.titulo:hover{
     height: 70vh;
     overflow: auto;
     scroll-behavior: smooth;
+    
  }
 
  .product-card{
@@ -91,7 +92,7 @@ h2.titulo:hover{
 
     border-radius: 50%;
   }
- .price-tag{
+ .price-tag, .cantidad-tag{
    background-color: var(--secondary-color);
    position: absolute;
    bottom: 10px;
@@ -102,8 +103,15 @@ h2.titulo:hover{
    -moz-box-shadow: 3px 7px 10px -3px rgba(0,0,0,0.75);
    box-shadow: 3px 7px 10px -3px rgba(0,0,0,0.75);
  }
+
+ .cantidad-tag{
+   top: 0;
+   left: 0;
+   bottom: unset;
+   right: unset;
+ }
  
- .price-tag p {
+ .price-tag p, .cantidad-tag p {
    margin: 0;
    padding: 0.5em;
    font-size: 1.2rem;

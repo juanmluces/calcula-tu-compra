@@ -1,9 +1,11 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { faListAlt } from "@fortawesome/free-regular-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 import { Observable } from "rxjs"
 import { NavbarService } from './services/navbar.service';
 import { componentAnimate, ngIfAnimate, navbarAnimation } from './animations/animations'
+import { ListasService } from './services/listas.service';
 
 
 
@@ -21,22 +23,33 @@ import { componentAnimate, ngIfAnimate, navbarAnimation } from './animations/ani
 export class AppComponent {
   title = 'calcula-tu-compra';
   faListAlt = faListAlt;
+  faPlusCircle = faPlusCircle;
+  showPlusIcon: boolean;
   showNav: boolean;
   showMobileNav: boolean;
   mobileNavOpened: boolean;
-  navbar$: Observable<any>;
+  navbar$: Observable<boolean>;
+  plusIcon$: Observable<boolean>;
   @ViewChild('navBurguer') navBurguer: ElementRef;
   @ViewChild('wrapper') wrapper: ElementRef;
   @ViewChild('logo') logo: ElementRef;
   logoUrl: string;
 
 
-  constructor(private navbarService: NavbarService, private rd: Renderer2) {
+  constructor(
+    private navbarService: NavbarService,
+    private rd: Renderer2,
+    private listasService: ListasService
+  ) {
     this.navbar$ = this.navbarService.getNavbarStatus$();
     this.navbar$.subscribe(navbar => this.showNav = navbar)
+    this.plusIcon$ = this.listasService.getPlusIconStatus$();
+    this.plusIcon$.subscribe(plusIcon => this.showPlusIcon = plusIcon);
+
     this.showMobileNav = true;
     this.mobileNavOpened = false;
     this.logoUrl = "../assets/svg/LOGO.svg";
+    this.showPlusIcon = false;
   }
 
   ngOnInit() {

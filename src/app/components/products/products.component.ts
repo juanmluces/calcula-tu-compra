@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NavbarService } from '../services/navbar.service';
+import { NavbarService } from '../../services/navbar.service';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { Product } from '../interfaces/product';
-import { ngIfAnimate } from '../animations/animations';
+import { Product } from '../../interfaces/product';
+import { ngIfAnimate } from '../../animations/animations';
+import { ListasService } from 'src/app/services/listas.service';
 
 
 
@@ -17,14 +18,17 @@ export class ProductsComponent implements OnInit {
   searchText: string;
   category: string;
   products: Product[];
+  productsInList: Product[];
   scrollPosition: number;
+  @ViewChild('productsContainer', { read: ElementRef }) public panel: ElementRef<any>;
 
 
+  constructor(
+    private navbarService: NavbarService,
+    private listasService: ListasService
+  ) {
 
-
-
-  @ViewChild('panel', { read: ElementRef }) public panel: ElementRef<any>;
-  constructor(private navbarService: NavbarService) {
+    this.productsInList = this.listasService.getNewList();
     this.navbarService.showNavbar(true)
     this.category = "Todos los productos"
     /* Placeholder array */
@@ -47,7 +51,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
-      "id": 1,
+      "id": 3,
       "marca": "Hacendado",
       "nombre": "Queso rallado hilos pizza (mozzarella)",
       "imagen": "https://a1.soysuper.com/dd7d2add51ede354c96c245e15a446cc.340.340.0.min.wmark.cbec57f5.jpg",
@@ -56,7 +60,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
-      "id": 1,
+      "id": 4,
       "marca": "Hacendado",
       "nombre": "Queso rallado hilos 4 variedades (emental-cheddar-gouda-curado) fundir y gratinar",
       "imagen": "https://a1.soysuper.com/1187328ec5916cda6c96e6faedbb3379.340.340.0.min.wmark.0b7441ac.jpg",
@@ -65,7 +69,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
-      "id": 1,
+      "id": 5,
       "marca": "Hacendado",
       "nombre": "Jamon cocido extra lonchas finas",
       "imagen": "https://a2.soysuper.com/038ae6dfadb153139dd66b8708c378da.340.340.0.min.wmark.e3d156d1.jpg",
@@ -74,7 +78,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
-      "id": 1,
+      "id": 6,
       "marca": "Hacendado",
       "nombre": "Salchicha frankfurt 7 U",
       "imagen": "https://a1.soysuper.com/12bea20d1ec4853f9dc8a2520d3b5ff1.340.340.0.min.wmark.e6f4e4a4.jpg",
@@ -83,7 +87,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
-      "id": 1,
+      "id": 7,
       "marca": "Hacendado",
       "nombre": "Queso barra havarti en lonchas",
       "imagen": "https://a1.soysuper.com/6a6ec66010bffc367ff210fe96118fc4.340.340.0.min.wmark.4d45f188.jpg",
@@ -92,7 +96,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
-      "id": 1,
+      "id": 8,
       "marca": "Hacendado",
       "nombre": "Fiambre pechuga pavo lonchas finas",
       "imagen": "https://a2.soysuper.com/22e978f4243d214753fa3ba11b830c03.340.340.0.min.wmark.967fe2fa.jpg",
@@ -101,7 +105,7 @@ export class ProductsComponent implements OnInit {
       "fk_categoria": 5
     },
     {
-      "id": 1,
+      "id": 9,
       "marca": "Hacendado",
       "nombre": "Guacamole",
       "imagen": "https://a2.soysuper.com/676056e8b4966db2c231e89ce25c4e11.340.340.0.min.wmark.3315f91d.jpg",
@@ -109,9 +113,19 @@ export class ProductsComponent implements OnInit {
       "descripcion": "Tarrina 200 g",
       "fk_categoria": 5
     },]
+
+
   }
 
   ngOnInit(): void {
+
+    this.productsInList.forEach(product => {
+      this.products.find(producto => {
+        if (producto.id === product.id) {
+          producto.cantidad = product.cantidad
+        }
+      });
+    })
   }
 
   onScroll($event) {
@@ -124,5 +138,9 @@ export class ProductsComponent implements OnInit {
 
   search() {
     console.log(this.searchText)
+  }
+
+  addProduct(pProduct) {
+    this.listasService.addProductToList(pProduct)
   }
 }

@@ -9,11 +9,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CategoriasComponent } from './components/categorias/categorias.component';
-import { ProductsComponent } from './products/products.component';
+import { ProductsComponent } from './components/products/products.component';
 import { PerfectScrollbarModule, } from 'ngx-perfect-scrollbar';
 import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.component';
 import { ConfigListaComponent } from './components/config-lista/config-lista.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MiListaComponent } from './components/mi-lista/mi-lista.component';
 
 
 
@@ -24,7 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CategoriasComponent,
     ProductsComponent,
     ScrollToTopComponent,
-    ConfigListaComponent
+    ConfigListaComponent,
+    MiListaComponent
   ],
   imports: [
     BrowserModule,

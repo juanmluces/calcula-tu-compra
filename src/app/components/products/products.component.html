@@ -9,7 +9,7 @@
         <span>&nbsp;Busca un producto</span>
       </div>
     </div>
-    <div #panel class="products-container" (scroll)="onScroll($event)">
+    <div #productsContainer class="products-container" (scroll)="onScroll($event)">
       <app-scroll-to-top [@inAnimation] (click)="scrollTop()" *ngIf="scrollPosition"></app-scroll-to-top>
       <div *ngFor="let product of products" class="product-card">
         <div class="img-container">
@@ -17,13 +17,19 @@
           <div class="price-tag">
             <p>{{product.precio}}€</p>
           </div>
+          <div [@inAnimation] *ngIf="product.cantidad === 1" class="cantidad-tag">
+            <p>{{product.cantidad}} Agregado</p>
+          </div>
+          <div [@inAnimation] *ngIf="product.cantidad > 1" class="cantidad-tag">
+            <p>{{product.cantidad}} Agregados</p>
+          </div>
         </div>
         <div class="product-texts">
           <p>{{product.marca}}</p>
           <p>{{product.nombre}}</p>
           <p>{{product.descripcion}}</p>
         </div>
-        <button class="btn btn-info">Añadir</button>
+        <button (click)="addProduct(product)" class="btn btn-info">Añadir</button>
       </div>
     </div>
   </div>

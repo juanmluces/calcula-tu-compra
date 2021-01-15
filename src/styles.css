@@ -86,6 +86,7 @@ body{
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
+	overflow: hidden;
 }
 
 
@@ -182,7 +183,24 @@ button.btn.btn-primary:active{
 	-moz-box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.72);
 	box-shadow: 2px 2px 2px 0px rgba(0,0,0,0.75);
 	
-}/* ?/primary */
+}
+
+button.btn.btn-primary:disabled,
+button[disabled],
+button.btn.btn-primary:disabled:hover,
+button[disabled]:hover,
+button.btn.btn-primary:disabled:focus,
+button[disabled]:focus,
+button.btn.btn-primary:disabled:active,
+button[disabled]:active
+{
+transform: none !important;
+	box-shadow: none !important;
+	background-color: var(--primary-color) !important;
+	border-color: var(--primary-color) !important;
+}
+
+/* ?/primary */
 
 @media(max-width: 800px){
 	div.dark-layer{

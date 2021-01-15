@@ -1,0 +1,28 @@
+<div class="dark-layer">
+  <div class="wrapper">
+
+
+    <div class="container-list">
+      <h3>{{nombreLista}}</h3>
+      <hr>
+      <div class="lista-productos">
+        <ul>
+          <li *ngFor="let product of productsInList">
+            <div class="d-none"></div>
+            <input type="checkbox" (change)="onCheck($event)">
+            <span placement="top" [ngbTooltip]="product.nombre" triggers="click:blur hover" class="nombre-producto">{{product.nombre}}</span>
+            <span class="width-10">x{{product.cantidad}}</span>
+            <span class="width-10">{{product.cantidad * product.precio |number:'.2'}}€</span>
+          </li>
+        </ul>
+      </div>
+      <div class="div-total">
+        <div>TOTAL</div>
+        <div>{{total | number:'.0-2'}}€</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

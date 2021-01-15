@@ -40,21 +40,39 @@ div.container-list hr{
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1em;
+  position: relative;
 
 }
 
-.lista-productos ul li fa-icon,
+.lista-productos ul li div.super-line{
+  position: absolute;
+  display: block !important;
+  top: 50%;
+  height: 2px;
+  width:100%;
+  background-color: black;
+
+}
+
+
 .lista-productos ul li span{
   margin: 0 0.25rem;
 }
 
-.lista-productos ul li fa-icon.delete-element{
-  cursor: pointer;
-  transition: opacity ease-in-out 150ms;
+.lista-productos ul li.selected-item {
+  color: rgba(0, 0, 0, 0.5)
 }
-.lista-productos ul li fa-icon.delete-element:hover{
+
+.lista-productos ul li input[type="checkbox"]{
+  width: 20px;
+  height: 20px;
+}
+
+input[type="checkbox"].slected-check{
   opacity: 0.5;
 }
+
+
 
 span.nombre-producto{
   text-align: left;
@@ -70,7 +88,7 @@ span.nombre-producto{
   width: 10%;
 }
 
-div.div-total, div.div-presupuesto, div.div-resultado{
+div.div-total{
   border-top: 0.25rem solid var(--neutral-color);
   border-bottom: 0.25rem solid var(--neutral-color);
   display: flex;
@@ -80,17 +98,15 @@ div.div-total, div.div-presupuesto, div.div-resultado{
   padding: 0 5%;
 }
 
-div.div-presupuesto, div.div-resultado{
-  border-top: 0;
-}
 
-div.div-total div, div.div-presupuesto div, div.div-resultado div{
+
+div.div-total div{
   font-size: 1.2rem;
   padding: 0.25em;
   font-weight: 700;
 
 }
-div.div-total div:first-child, div.div-presupuesto div:first-child, div.div-resultado div:first-child{
+div.div-total div:first-child{
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -101,51 +117,11 @@ div.container-list button{
   height: 2rem;
 }
 
-div.container-list div.footer input{
-width: 100%;
-max-width: 150px;
-}
-
-div.footer{
-  display: flex;
-flex-wrap: wrap;
-align-content: center;
-align-items: center;
-}
-
-div.footer-control{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  padding-top: 1em;
-  width: 100%;
-}
 
 div.button-container{
   width: 100%;
 }
 
-ngb-alert.success-alert{
-  max-width: 500px;
-  margin: auto;
-  top: 1em;
-}
 
-@media(min-width: 520px){
-  div.footer-control{
-    width: 50%;
-  }
-  div.button-container{
-    width: 50%;
-  }
-}
 
-div.footer-control .nombre-lista, div.footer-control .presupuesto-lista{
- display: flex;
- flex-direction: column;
- justify-content: center;
- padding-bottom: 1em;
 
-}

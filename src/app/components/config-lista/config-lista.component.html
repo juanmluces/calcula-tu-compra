@@ -10,11 +10,11 @@
       <div class="lista-productos">
         <ul>
           <li *ngFor="let product of productsInList">
-            <fa-icon (click)="deleteElement(product)" class="text-danger delete-element" [icon]="faTrashAlt"></fa-icon>
+            <fa-icon (click)="deleteElement(product)" class="text-danger delete-element width-10" [icon]="faTrashAlt"></fa-icon>
             <span placement="top" [ngbTooltip]="product.nombre" triggers="click:blur hover" class="nombre-producto">{{product.nombre}}</span>
-            <fa-icon (click)="minusOneElement(product)" class="text-warning delete-element" [icon]="faMinus"></fa-icon>
-            <span>x{{product.cantidad}}</span>
-            <span>{{product.cantidad * product.precio |number:'.2'}}€</span>
+            <fa-icon (click)="minusOneElement(product)" class="text-warning delete-element width-10" [icon]="faMinus"></fa-icon>
+            <span class="width-10">x{{product.cantidad}}</span>
+            <span class="width-10">{{product.cantidad * product.precio |number:'.2'}}€</span>
           </li>
         </ul>
       </div>
@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="button-container">
-          <button (click)="onGuardarLista()" class="guardar-button btn btn-primary">Guardar Lista</button>
+          <button (click)="onGuardarLista()" [disabled]="!productsInList.length" class="guardar-button btn btn-primary">Guardar Lista</button>
         </div>
       </div>
     </div>

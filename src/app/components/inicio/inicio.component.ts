@@ -1,4 +1,3 @@
-import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ngIfAnimate } from 'src/app/animations/animations';

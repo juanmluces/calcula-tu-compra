@@ -54,8 +54,19 @@ ul.nav-links li, ul.nav-links li.active, ul.nav-list li, ul.nav-list li.active{
   transition: color ease-in-out 300ms, background-color ease-in-out 300ms;
 }
 
+li.list-logo{
+  position: relative;
+}
+
 li.list-logo fa-icon{
   font-size: 2rem;
+}
+li.list-logo fa-icon.plus-icon{
+  font-size: 1rem;
+  border-radius: 50%;
+  position: absolute;
+  right: 1em;
+  bottom: 0.5em;
 }
 
 ul.nav-links li.active, ul.nav-list li.active{
