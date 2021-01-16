@@ -147,6 +147,11 @@ div.nav-hamburguer{
     font-size: 1.2rem;
   }
 
+  ul li.list-logo.active{
+    height: auto;
+    padding: 0.3em 0.8em;
+  }
+
   div.logo-container{
     width:40%;
     max-width: 200px;

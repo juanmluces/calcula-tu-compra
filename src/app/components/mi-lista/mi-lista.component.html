@@ -10,7 +10,7 @@
           <li *ngFor="let product of productsInList">
             <div class="d-none"></div>
             <input type="checkbox" (change)="onCheck($event)">
-            <span placement="top" [ngbTooltip]="product.nombre" triggers="click:blur hover" class="nombre-producto">{{product.nombre}}</span>
+            <span placement="top" tooltipClass="tooltip-class" [ngbTooltip]="product.nombre" triggers="click:blur hover" class="nombre-producto">{{product.nombre}}</span>
             <span class="width-10">x{{product.cantidad}}</span>
             <span class="width-10">{{product.cantidad * product.precio |number:'.2'}}€</span>
           </li>

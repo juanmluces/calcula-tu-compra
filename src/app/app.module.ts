@@ -15,6 +15,7 @@ import { ScrollToTopComponent } from './components/scroll-to-top/scroll-to-top.c
 import { ConfigListaComponent } from './components/config-lista/config-lista.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MiListaComponent } from './components/mi-lista/mi-lista.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 
 
 
@@ -26,7 +27,8 @@ import { MiListaComponent } from './components/mi-lista/mi-lista.component';
     ProductsComponent,
     ScrollToTopComponent,
     ConfigListaComponent,
-    MiListaComponent
+    MiListaComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

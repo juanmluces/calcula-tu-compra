@@ -4,6 +4,7 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
 import { ConfigListaComponent } from './components/config-lista/config-lista.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { MiListaComponent } from './components/mi-lista/mi-lista.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
 import { ProductsComponent } from './components/products/products.component';
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'categorias', component: CategoriasComponent, data: { animation: 'categoria' } },
   { path: 'productos', component: ProductsComponent, data: { animation: 'products' } },
   { path: 'config-lista', component: ConfigListaComponent, data: { animation: 'configLista' } },
-  { path: 'mi-lista', component: MiListaComponent, data: { animation: 'miLista' } }
+  { path: 'mi-lista', component: MiListaComponent, data: { animation: 'miLista' } },
+  { path: 'perfil', component: PerfilComponent, data: { animation: 'perfil' } }
 ];
 
 @NgModule({

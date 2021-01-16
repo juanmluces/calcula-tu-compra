@@ -1,0 +1,36 @@
+<div class="dark-layer">
+  <div class="wrapper">
+    <h2 class="titulo">Mi Perfil</h2>
+
+    <div class="profile-container">
+      <div class="avatar-container">
+        <div class="img-container">
+          <img src="../../../assets/svg/user-gray.svg" alt="">
+        </div>
+        <p class="username">username@username.com</p>
+        <hr>
+      </div>
+      <div class="search-boxes">
+        <div class="search-box">
+          <input class="search-box-input" type="search" (input)="search()" [(ngModel)]="searchText" />
+          <div *ngIf="!searchText" class="search-box-placeholder-wrapper">
+            <fa-icon [icon]="faSearch" class="search-box-placeholder"></fa-icon>
+            <span>&nbsp;Buscar una lista...</span>
+          </div>
+        </div>
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmitSearch()">
+          <div class="search-dates-box">
+            <label>Buscar lista desde</label>
+            <input (click)="fechaDesde.toggle()" class="search-box-input text-center" [placeholder]="placeholderDate | date: 'dd-MM-yyyy'" formControlName="fechaDesde" name="fechaDesde" ngbDatepicker #fechaDesde="ngbDatepicker">
+          </div>
+          <div class="search-dates-box">
+            <label>Buscar lista hasta</label>
+            <input (click)="fechaHasta.toggle()" class="search-box-input text-center" [placeholder]="placeholderDate | date: 'dd-MM-yyyy'" formControlName="fechaHasta" name="fechaHasta" ngbDatepicker #fechaHasta="ngbDatepicker">
+          </div>
+          <input type="submit" value="Buscar Listas" class="btn btn-primary mi-boton" [disabled]="!searchForm.valid">
+          <button (click)="borrarFechas()" type="button" class="btn mi-boton btn-info boton-borrar-fechas">Borrar búsquedas</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

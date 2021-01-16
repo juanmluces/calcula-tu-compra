@@ -1,0 +1,96 @@
+div.profile-container{
+  background-color: rgba(255, 255, 255, 0.541);
+  width: 95%;
+  max-width: 400px;
+  margin:auto;
+  border-radius: 7px;
+}
+
+h2.titulo{
+  top:0;
+  margin: 1em 0;
+}
+
+div.avatar-container{
+  padding: 1em;
+  text-align: center;
+}
+
+div.img-container{
+  max-width: 200px;
+  margin: auto;
+  margin-bottom: 1em;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 0.5em solid var(--neutral-color);
+  padding: 1em;
+}
+
+div.img-container img{
+  border-radius: 50%;
+}
+
+div.avatar-container hr{
+  border-top: 0.25rem solid var(--neutral-color);
+  width: 80%;
+  max-width: 150px;
+  margin: auto;
+  border-radius: 50px;
+}
+
+p.username{
+  font-size: 1.2rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+div.search-boxes{
+  overflow: hidden;
+  padding: 1em;
+}
+
+.search-box {   
+  position: relative;
+  width: max-content;
+  margin: auto;
+
+}
+
+.search-box-placeholder-wrapper {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  transform:  translate(-50%, -50%);
+  top: 50%;  
+  width: calc(100% - 3.5em); 
+  color: var(--neutral-color);
+  transition: ease-in 300ms;
+  font-size: 1rem;
+ }
+
+ .search-box-input{
+   border-radius: 500px;
+   padding: 0.25em 1em;
+   /* padding-left: 1em; */
+   border:none;
+   outline: none;
+   font-size: 1.2rem;
+   width: 200px;
+ 
+ }
+
+.search-box-input:focus + .search-box-placeholder-wrapper {
+ opacity: 0; 
+} 
+
+.search-dates-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 1em auto;
+}
+
+button.boton-borrar-fechas{
+  margin-top: 1em;
+}
