@@ -16,6 +16,7 @@ import { ConfigListaComponent } from './components/config-lista/config-lista.com
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MiListaComponent } from './components/mi-lista/mi-lista.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
+import { ChartModule } from 'primeng/chart'
 
 
 
@@ -38,7 +39,8 @@ import { PerfilComponent } from './components/perfil/perfil.component';
     BrowserAnimationsModule,
     FontAwesomeModule,
     PerfectScrollbarModule,
-    NgbModule
+    NgbModule,
+    ChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { animation, trigger, animateChild, group, transition, animate, style, query, state } from '@angular/animations';
+import { trigger, animateChild, group, transition, animate, style, query, state } from '@angular/animations';
 
 
 
@@ -41,12 +41,12 @@ export const ngIfAnimate = [
   trigger(
     'inAnimation', [
     transition(':enter', [
-      style({ opacity: 0 }),
-      animate('150ms  ease-out',
+      style({ opacity: 0}),
+      animate('150ms ease-out',
         style({ opacity: 1 }))
     ]),
     transition(':leave', [
-      style({ opacity: 1 }),
+      style({ opacity: 1}),
       animate('150ms ease-in', style({ opacity: 0 }))
     ]),
 
@@ -90,4 +90,23 @@ export const fade = [
       animate(300)
     ])
   ])
+];
+
+
+/* ngIf Animations */
+export const ngIfAnimate2 = [
+  trigger(
+    'inAnimation2', [
+    transition(':enter', [
+      style({ opacity: 0, height: 0}),
+      animate('150ms ease-out',
+        style({ opacity: 1 }))
+    ]),
+    transition(':leave', [
+      style({ opacity: 1,  height: 0}),
+      animate('150ms ease-in', style({ opacity: 0}))
+    ]),
+
+  ]
+  )
 ];

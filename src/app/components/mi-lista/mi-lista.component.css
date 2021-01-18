@@ -66,6 +66,7 @@ div.container-list hr{
 .lista-productos ul li input[type="checkbox"]{
   width: 20px;
   height: 20px;
+  cursor: pointer;
 }
 
 input[type="checkbox"].slected-check{

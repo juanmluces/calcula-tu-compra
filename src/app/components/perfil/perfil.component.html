@@ -1,36 +1,116 @@
 <div class="dark-layer">
   <div class="wrapper">
-    <h2 class="titulo">Mi Perfil</h2>
-
-    <div class="profile-container">
-      <div class="avatar-container">
-        <div class="img-container">
-          <img src="../../../assets/svg/user-gray.svg" alt="">
-        </div>
-        <p class="username">username@username.com</p>
-        <hr>
+    <!-- modal -->
+    <ngb-alert #selfClosingAlert class="success-alert" *ngIf="successMessage" type="success" (closed)="successMessage = ''">{{ successMessage }}
+    </ngb-alert>
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Subir un avatar</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="search-boxes">
-        <div class="search-box">
-          <input class="search-box-input" type="search" (input)="search()" [(ngModel)]="searchText" />
-          <div *ngIf="!searchText" class="search-box-placeholder-wrapper">
-            <fa-icon [icon]="faSearch" class="search-box-placeholder"></fa-icon>
-            <span>&nbsp;Buscar una lista...</span>
+      <form [formGroup]="modalForm" (ngSubmit)="onModalSubmit()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Url de tu avatar</label>
+            <div class="input-group">
+              <input type="text" class="form-control" formControlName="avatarUrl">
+            </div>
           </div>
         </div>
-        <form [formGroup]="searchForm" (ngSubmit)="onSubmitSearch()">
-          <div class="search-dates-box">
-            <label>Buscar lista desde</label>
-            <input (click)="fechaDesde.toggle()" class="search-box-input text-center" [placeholder]="placeholderDate | date: 'dd-MM-yyyy'" formControlName="fechaDesde" name="fechaDesde" ngbDatepicker #fechaDesde="ngbDatepicker">
+        <div class="modal-footer">
+          <input [disabled]="!modalForm.valid" type="submit" value="guardar" (click)="modal.close('Save click')" class="btn btn-primary mi-boton">
+        </div>
+      </form>
+    </ng-template>
+
+
+    <!-- / modal -->
+
+    <h2 class="titulo">Mi Perfil</h2>
+    <div class="contenedor-perfil-desktop">
+
+
+      <div class="profile-container">
+        <div class="avatar-container">
+          <div class="img-container">
+            <img src="../../../assets/svg/user-gray.svg" alt="">
           </div>
-          <div class="search-dates-box">
-            <label>Buscar lista hasta</label>
-            <input (click)="fechaHasta.toggle()" class="search-box-input text-center" [placeholder]="placeholderDate | date: 'dd-MM-yyyy'" formControlName="fechaHasta" name="fechaHasta" ngbDatepicker #fechaHasta="ngbDatepicker">
+          <p class="username">username@username.com</p>
+          <hr>
+          <fa-icon (click)="open(content)" class="edit-icon" [icon]="faEdit"></fa-icon>
+        </div>
+        <div class="search-boxes">
+          <div class="search-box">
+            <input class="search-box-input" type="search" (input)="search()" [(ngModel)]="searchText" />
+            <div *ngIf="!searchText" class="search-box-placeholder-wrapper">
+              <fa-icon [icon]="faSearch" class="search-box-placeholder"></fa-icon>
+              <span>&nbsp;Buscar una lista...</span>
+            </div>
           </div>
-          <input type="submit" value="Buscar Listas" class="btn btn-primary mi-boton" [disabled]="!searchForm.valid">
-          <button (click)="borrarFechas()" type="button" class="btn mi-boton btn-info boton-borrar-fechas">Borrar búsquedas</button>
-        </form>
+          <form [formGroup]="searchForm" (ngSubmit)="onSubmitSearch()">
+            <div class="search-dates-box">
+              <label>Buscar lista desde</label>
+              <input (click)="fechaDesde.toggle()" class="search-box-input text-center" [placeholder]="placeholderDate | date: 'dd-MM-yyyy'" formControlName="fechaDesde" name="fechaDesde" ngbDatepicker #fechaDesde="ngbDatepicker">
+            </div>
+            <div class="search-dates-box">
+              <label>Buscar lista hasta</label>
+              <input (click)="fechaHasta.toggle()" class="search-box-input text-center" [placeholder]="placeholderDate | date: 'dd-MM-yyyy'" formControlName="fechaHasta" name="fechaHasta" ngbDatepicker #fechaHasta="ngbDatepicker">
+            </div>
+            <input type="submit" value="Buscar Listas" class="btn btn-primary mi-boton" [disabled]="!searchForm.valid">
+            <button [disabled]="!searchForm.get('fechaHasta').value && !searchForm.get('fechaDesde').value && !searchText" (click)="borrarFechas()" type="button" class="btn mi-boton btn-info boton-borrar-fechas">Borrar búsquedas</button>
+          </form>         
+        </div>
+      </div>
+
+      <div class="columna-3-perfil">
+        <div class="listas-buscadas-contenedor">
+          <div class="listas-buscadas">
+            <p>Búsquedas</p>
+            <ul [@inAnimation2] *ngIf="!listasBuscadas">
+              <li> - No hay listas -</li>
+            </ul>
+           
+            <perfect-scrollbar [@inAnimation2] *ngIf="listasBuscadas" [config]="config">
+              <ul>
+                <li  (click)="cargarLista(lista.id)" [attr.data-id]="lista.id" *ngFor="let lista of listasBuscadas; let index = index">
+                  <span> -{{lista.titulo}} </span> &nbsp; <span>{{lista.fecha | date:'dd/MM/yyyy '}}</span>
+                </li>
+              </ul>
+            </perfect-scrollbar>
+          </div>
+
+        </div>
+        <div class="contenedor-chart">
+          <div class="chart">
+            <p-chart type="bar" [data]="data"></p-chart>
+          </div>
+        </div>
+      </div>
+
+      <div [@inAnimation] *ngIf="listaCargada" class="container-list">
+        <h3>{{listaCargada.titulo}}</h3>
+        <hr>
+        <p>{{listaCargada.fecha | date}}</p>
+        <hr>
+
+        <perfect-scrollbar [config]="config" class="lista-productos">
+          <ul>
+            <li *ngFor="let producto of listaCargada.productos">
+              <span placement="top" tooltipClass="tooltip-class" [ngbTooltip]="producto.nombre" triggers="click:blur hover" class="nombre-producto">{{producto.nombre}}</span>
+              <span class="width-10">x{{producto.cantidad}}</span>
+              <span class="width-10">{{producto.cantidad * producto.precio |number:'.2'}}€</span>
+            </li>
+          </ul>
+        </perfect-scrollbar>
+        <div class="div-total">
+          <div>TOTAL</div>
+          <div>{{totalListaCargada| number:'.0-2'}}€</div>
+        </div>
+
       </div>
     </div>
+
   </div>
 </div>

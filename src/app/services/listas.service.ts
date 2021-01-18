@@ -51,4 +51,15 @@ export class ListasService {
     this.showPlusIcon(false)
     this.newList = [];
   }
+
+  calculateTotal(pProductList) {
+    let result = 0;
+    for (let product of pProductList) {
+      result += (product.cantidad * product.precio)
+    }
+    return result
+  }
+
+
+
 }

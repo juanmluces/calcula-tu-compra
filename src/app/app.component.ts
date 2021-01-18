@@ -34,6 +34,7 @@ export class AppComponent {
   @ViewChild('wrapper') wrapper: ElementRef;
   @ViewChild('logo') logo: ElementRef;
   logoUrl: string;
+  logged: boolean;
 
 
   constructor(
@@ -41,6 +42,7 @@ export class AppComponent {
     private rd: Renderer2,
     private listasService: ListasService
   ) {
+    this.logged = true;
     this.navbar$ = this.navbarService.getNavbarStatus$();
     this.navbar$.subscribe(navbar => this.showNav = navbar)
     this.plusIcon$ = this.listasService.getPlusIconStatus$();

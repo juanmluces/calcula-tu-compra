@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/interfaces/product';
+import { ListasService } from 'src/app/services/listas.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 
 @Component({
@@ -13,7 +14,10 @@ export class MiListaComponent implements OnInit {
   productsInList: Product[];
   total: number;
 
-  constructor(private navbarServices: NavbarService) {
+  constructor(
+    private navbarServices: NavbarService,
+    private listasService: ListasService
+  ) {
 
     this.navbarServices.showNavbar(true)
 
@@ -116,15 +120,9 @@ export class MiListaComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.caclculateTotal()
+    this.total = this.listasService.calculateTotal(this.productsInList)
   }
 
-  caclculateTotal() {
-    this.total = 0;
-    for (let product of this.productsInList) {
-      this.total += (product.cantidad * product.precio)
-    }
-  }
 
   onCheck($event) {
     $event.target.classList.toggle('slected-check')

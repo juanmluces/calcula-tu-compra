@@ -45,7 +45,7 @@ export class ConfigListaComponent implements OnInit {
         this.selfClosingAlert.close();
       }
     });
-    this.caclculateTotal();
+    this.total = this.listasService.calculateTotal(this.productsInList)
     if (localStorage.getItem('nombreLista')) {
       this.nombreLista = localStorage.getItem('nombreLista')
     }
@@ -59,16 +59,9 @@ export class ConfigListaComponent implements OnInit {
     localStorage.setItem('presupuesto', JSON.stringify(this.presupuesto));
   }
 
-  caclculateTotal() {
-    this.total = 0;
-    for (let product of this.productsInList) {
-      this.total += (product.cantidad * product.precio)
-    }
-  }
-
   deleteElement(pProduct) {
     this.listasService.removeProductNewList(pProduct.id, true);
-    this.caclculateTotal();
+    this.total = this.listasService.calculateTotal(this.productsInList);
     if (!this.productsInList.length) {
       this.listasService.emptyNewList()
     }
@@ -80,7 +73,7 @@ export class ConfigListaComponent implements OnInit {
     } else {
       this.listasService.removeProductNewList(pProduct.id, true)
     }
-    this.caclculateTotal()
+    this.total = this.listasService.calculateTotal(this.productsInList);
     if (!this.productsInList.length) {
       this.listasService.emptyNewList()
     }

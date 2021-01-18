@@ -86,13 +86,13 @@ body{
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
-	overflow: hidden;
 }
 
 
 div.wrapper{
 	max-width: 2200px;	
 	padding-top: 0.1rem;
+
 }
 
 div.dark-layer{
@@ -145,6 +145,30 @@ button.btn.btn-info:active{
 	
 }
 
+button.btn.btn-info:disabled,
+button.btn.btn-info[disabled],
+button.btn.btn-info:disabled:hover,
+button.btn.btn-info[disabled]:hover,
+button.btn.btn-info:disabled:focus,
+button.btn.btn-info[disabled]:focus,
+button.btn.btn-info:disabled:active,
+button.btn.btn-info[disabled]:active,
+input.btn.btn-info:disabled,
+input.btn.btn-info[disabled],
+input.btn.btn-info:disabled:hover,
+input.btn.btn-info[disabled]:hover,
+input.btn.btn-info:disabled:focus,
+input.btn.btn-info[disabled]:focus,
+input.btn.btn-info:disabled:active,
+input.btn.btn-info[disabled]:active
+{
+transform: none !important;
+	box-shadow: none !important;
+	background-color: var(--secondary-color) !important;
+	border-color: var(--secondary-color) !important;
+}
+
+
 /* ? /INFO */
 /* ? primary */
 
@@ -190,21 +214,21 @@ input.btn.btn-primary:active{
 }
 
 button.btn.btn-primary:disabled,
-button[disabled],
+button.btn.btn-primary[disabled],
 button.btn.btn-primary:disabled:hover,
-button[disabled]:hover,
+button.btn.btn-primary[disabled]:hover,
 button.btn.btn-primary:disabled:focus,
-button[disabled]:focus,
+button.btn.btn-primary[disabled]:focus,
 button.btn.btn-primary:disabled:active,
-button[disabled]:active,
+button.btn.btn-primary[disabled]:active,
 input.btn.btn-primary:disabled,
-input[disabled],
+input.btn.btn-primary[disabled],
 input.btn.btn-primary:disabled:hover,
-input[disabled]:hover,
+input.btn.btn-primary[disabled]:hover,
 input.btn.btn-primary:disabled:focus,
-input[disabled]:focus,
+input.btn.btn-primary[disabled]:focus,
 input.btn.btn-primary:disabled:active,
-input[disabled]:active
+input.btn.btn-primary[disabled]:active
 {
 transform: none !important;
 	box-shadow: none !important;
@@ -232,6 +256,7 @@ h2.titulo{display: none;}
 @media(max-width: 800px){
 	div.dark-layer{
 		min-height: calc(100vh - 50px);
+		padding-bottom: 0.1px;
 	}
 
 	h2.titulo{
@@ -242,5 +267,8 @@ h2.titulo{display: none;}
     padding: 0.125em;
     position: relative;
     top: 1em;
-  }
+	}
+	
+
+
 }

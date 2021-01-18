@@ -71,14 +71,14 @@ export class InicioComponent implements OnInit {
     this.homeBox = false;
     setTimeout(() => {
       this.loginBox = true;
-    }, 200);
+    }, 300);
   }
 
   onSingUp() {
     this.homeBox = false;
     setTimeout(() => {
       this.signUpBox = true;
-    }, 200);
+    }, 300);
   }
 
   onVolver($event) {
@@ -90,7 +90,7 @@ export class InicioComponent implements OnInit {
     if (this.signUpBox) this.signUpBox = false;
     setTimeout(() => {
       this.homeBox = true
-    }, 200);
+    }, 300);
 
   }
 
