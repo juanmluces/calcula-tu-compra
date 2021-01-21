@@ -5,7 +5,8 @@
       <div class="contenedor-categorias">
         <perfect-scrollbar [config]="config">
           <ul>
-            <li routerLink="/productos" *ngFor="let category of categories" (mouseenter)="changeImage()">- {{category}}</li>
+            <li (click)="selectCategory(0)" routerLink="/productos" (mouseenter)="changeImage()">-Todos Los Productos</li>
+            <li (click)="selectCategory(category.id)" routerLink="/productos" *ngFor="let category of categories" (mouseenter)="changeImage(category.image)">- {{category.name |titlecase}}</li>
           </ul>
         </perfect-scrollbar>
       </div>

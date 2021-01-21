@@ -9,6 +9,7 @@ import { Observable, Subject } from 'rxjs';
 export class NavbarService {
 
   private subjectNavbar$ = new Subject<boolean>();
+  private subjectLogin$ = new Subject<boolean>();
 
   constructor() {
   }
@@ -26,6 +27,14 @@ export class NavbarService {
 
   getNavbarStatus$(): Observable<boolean> {
     return this.subjectNavbar$.asObservable();
+  }
+
+  showLogin(pShowLogin: boolean) {
+    this.subjectLogin$.next(!pShowLogin);
+  }
+
+  getLoginStatus$(): Observable<boolean> {
+    return this.subjectLogin$.asObservable();
   }
 
 }

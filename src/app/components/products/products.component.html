@@ -1,7 +1,7 @@
 <div class="dark-layer">
   <div class="wrapper">
 
-    <h2 routerLink="/categorias" class="titulo">{{category}}</h2>
+    <h2 *ngIf="category" routerLink="/categorias" class="titulo">{{category.name | titlecase}}</h2>
     <div class="search-box">
       <input class="search-box-input" type="search" (input)="search()" [(ngModel)]="searchText" />
       <div *ngIf="!searchText" class="search-box-placeholder-wrapper">

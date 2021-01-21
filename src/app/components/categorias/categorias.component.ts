@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { fade } from 'src/app/animations/animations';
+import { fade, ngIfAnimate } from 'src/app/animations/animations';
 import { NavbarService } from 'src/app/services/navbar.service';
 
 import { PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { ProductsService } from 'src/app/services/products.service';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -14,7 +15,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   selector: 'app-categorias',
   templateUrl: './categorias.component.html',
   styleUrls: ['./categorias.component.css'],
-  animations: [fade],
+  animations: [fade, ngIfAnimate],
   providers: [
     {
       provide: PERFECT_SCROLLBAR_CONFIG,
@@ -24,35 +25,40 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 })
 export class CategoriasComponent implements OnInit {
   categoryImage: string;
-  categories: string[];
+  categories: any[];
   state: string;
   config: PerfectScrollbarConfigInterface = {};
 
-  constructor(private navbarService: NavbarService) {
+  constructor(
+    private navbarService: NavbarService,
+    private productsService: ProductsService
+  ) {
 
     this.categoryImage = '../../../assets/images/todos.jpg';
-    this.categories = ['Todos los productos', 'Categoria 1', 'Categoria 2', 'Categoria 3', 'Categoria 4', 'Categoria 5', 'Categoria 6', 'Categoria 7', 'Categoria 8', 'Categoria 9', 'Categoria 10', 'Categoria 11', 'Categoria 12',];
+    this.categories = []
     this.state = 'in'
 
     this.navbarService.showNavbar(true);
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+
+    this.categories = await this.productsService.getAllCategories();
 
   }
 
-  changeImage() {
-    if (this.state === 'in') {
+  changeImage(pImageSrc = '../../../assets/images/todos.jpg') {
+    if (pImageSrc != this.categoryImage) {
       this.state = 'out';
       setTimeout(() => {
-        if (this.categoryImage === '../../../assets/images/todos.jpg') {
-          this.categoryImage = '../../../assets/images/bebidas.jpg'
-        } else {
-          this.categoryImage = '../../../assets/images/todos.jpg'
-        }
+        this.categoryImage = pImageSrc
         this.state = 'in';
-      }, 300);
+      }, 150);
     }
+  }
+
+  selectCategory(pId) {
+    this.productsService.selectCategory(pId);
   }
 
 }

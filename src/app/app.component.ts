@@ -30,6 +30,7 @@ export class AppComponent {
   mobileNavOpened: boolean;
   navbar$: Observable<boolean>;
   plusIcon$: Observable<boolean>;
+  logged$: Observable<boolean>;
   @ViewChild('navBurguer') navBurguer: ElementRef;
   @ViewChild('wrapper') wrapper: ElementRef;
   @ViewChild('logo') logo: ElementRef;
@@ -42,9 +43,12 @@ export class AppComponent {
     private rd: Renderer2,
     private listasService: ListasService
   ) {
-    this.logged = true;
+    this.logged$ = this.navbarService.getLoginStatus$();
+    this.logged$.subscribe(logged => this.logged = logged);
+
     this.navbar$ = this.navbarService.getNavbarStatus$();
     this.navbar$.subscribe(navbar => this.showNav = navbar)
+
     this.plusIcon$ = this.listasService.getPlusIconStatus$();
     this.plusIcon$.subscribe(plusIcon => this.showPlusIcon = plusIcon);
 
@@ -57,6 +61,11 @@ export class AppComponent {
   ngOnInit() {
     this.checkWidthShowNavbar();
     window.onresize = () => { this.checkWidthShowNavbar() }
+    if (localStorage.getItem('user_token')) {
+      this.navbarService.showLogin(false);
+    } else {
+      this.navbarService.showLogin(true);
+    }
   }
 
   ngAfterViewInit() {

@@ -1,0 +1,242 @@
+div.conoceme-perfil {
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 95%;
+  max-width: 400px;
+  margin: auto;
+  border-radius: 7px;
+  padding: 2em;
+  margin-bottom: 2em;
+}
+
+h2.titulo {
+  top: 0;
+  margin: 1em 0;
+}
+
+div.imagen-contenedor {
+  overflow: hidden;
+  border-radius: 50%;
+  border: 0.3em solid var(--neutral-color);
+  width: 150px;
+  /* max-width: 80%; */
+  margin: 1em auto;
+}
+
+div.nombre-email-container {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+div.nombre-email-container h4 {
+  text-align: center;
+  color: var(--primary-color-dark);
+}
+
+div.nombre-email-container h5 {
+  word-break: break-all;
+  color: var(--primary-color-dark);
+  font-size: 1rem;
+}
+
+div.nombre-email-container hr {
+  border-top: 0.25em solid var(--neutral-color);
+  border-radius: 50px;
+  width: 80%;
+  margin: 1em auto 0.85em;
+}
+
+div.bio-container h5 {
+  text-align: center;
+  margin-bottom: 1em;
+  color: var(--primary-color-dark);
+}
+
+div.bio-container p {
+  line-height: 1.2;
+}
+
+div.bio-container p:first-of-type {
+  text-indent: 1em;
+}
+
+div.social-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: -1em;
+}
+
+div.social-element {
+  margin: 1em 0;
+}
+
+div.social-element a {
+  align-items: center;
+  display: flex;
+  font-size: 1.4rem;
+  text-decoration: none;
+  font-weight: 900;
+  color: var(--neutral-color);
+  transition: color ease-in-out 300ms;
+  justify-content: center;
+}
+
+div.social-element a.linkdin:hover,
+div.social-element a.linkdin:focus,
+div.social-element a.linkdin:active {
+  color: #0e76a8;
+}
+div.social-element a.github:hover,
+div.social-element a.github:focus,
+div.social-element a.github:active {
+  color: #211f1f;
+}
+div.social-element a.portfolio:hover,
+div.social-element a.portfolio:focus,
+div.social-element a.portfolio:active {
+  color: #147b90;
+}
+div.social-element a.portfolio:hover img.underImg,
+div.social-element a.portfolio:focus img.underImg,
+div.social-element a.portfolio:active img.underImg {
+  opacity: 1;
+}
+div.social-element a.portfolio:hover img.overImg,
+div.social-element a.portfolio:focus img.overImg,
+div.social-element a.portfolio:active img.overImg {
+  opacity: 0;
+}
+
+div.social-element a.github {
+  margin-left: -0.25em;
+}
+div.social-element a.portfolio {
+  margin-left: 0.5em;
+}
+
+div.social-element fa-Icon {
+  font-size: 2rem;
+  transition: color ease-in-out 300ms;
+  margin-right: 0.5em;
+}
+
+div.social-element span.logo-span {
+  width: 32px;
+  display: inline-block;
+  border-radius: 5px;
+  position: relative;
+  margin-right: 0.5em;
+}
+
+div.social-element span.logo-span img {
+  transition: opacity ease-in-out 300ms;
+}
+
+div.social-element span.logo-span img.underImg {
+  opacity: 0;
+}
+
+div.social-element span.logo-span img.overImg {
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.desktop {
+  display: none;
+}
+
+div.btn-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+div.btn-group label {
+  margin-bottom: 1em;
+}
+
+@media (min-width: 800px) {
+  .bio-container {
+    background-color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    margin: auto;
+    padding: 1em 3em;
+    border-radius: 7px;
+    -webkit-box-shadow: 3px 7px 10px -3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 7px 10px -3px rgba(0, 0, 0, 0.75);
+    box-shadow: 3px 7px 10px -3px rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .desktop {
+    display: block;
+  }
+
+  .mobile {
+    display: none;
+  }
+
+  div.conoceme-perfil {
+    width: 100%;
+    max-width: unset;
+    -webkit-box-shadow: 3px 7px 10px -3px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 7px 10px -3px rgba(0, 0, 0, 0.75);
+    box-shadow: 3px 7px 10px -3px rgba(0, 0, 0, 0.75);
+  }
+
+  .contenedor-conoceme {
+    display: flex;
+    padding: 2em;
+    padding-bottom: 0;
+    margin: auto;
+    width: 90%;
+  }
+
+  div.contenedor-perfil-desktop {
+    /* width: 30%; */
+    margin: 0;
+  }
+
+  div.contenedor-bio-desktop {
+    width: 60%;
+    margin: 0 auto;
+  }
+
+  div.social-container {
+    margin-left: 1em;
+  }
+
+  div.social-element a {
+    justify-content: unset;
+  }
+
+  div.social-element a.github {
+    margin-left: unset;
+  }
+
+  div.social-element a.portfolio {
+    margin-left: unset;
+  }
+
+  .bio-container h3 {
+    text-align: center;
+    font-weight: 900;
+    color: var(--neutral-color);
+    padding: 0.5em;
+  }
+
+  .bio-container p {
+    font-size: 1.1rem;
+    color: var(--primary-color-dark);
+  }
+  div.btn-group {
+    flex-direction: row;
+  }
+
+  div.btn-group label {
+    margin-bottom: 0;
+  }
+}

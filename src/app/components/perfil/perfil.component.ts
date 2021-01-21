@@ -14,7 +14,6 @@ import {
   CustomDateParserFormatter,
 } from 'src/app/services/datepicker-adapter';
 import { NavbarService } from 'src/app/services/navbar.service';
-// import { PerfilService } from 'src/app/services/perfil.service';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { Subject } from 'rxjs';
 import { Lista } from 'src/app/interfaces/lista';
@@ -64,7 +63,6 @@ export class PerfilComponent implements OnInit {
 
   constructor(
     private navbarService: NavbarService,
-    // private perfilService: PerfilService,
     private modalService: NgbModal,
     private listasService: ListasService
   ) {
@@ -189,7 +187,7 @@ export class PerfilComponent implements OnInit {
           descripcion: 'Paquete pack 2 x 200 g - 400 g',
           fk_categoria: 5,
           cantidad: 1,
-        }
+        },
       ],
     };
     this.totalListaCargada = this.listasService.calculateTotal(
@@ -211,7 +209,7 @@ export class PerfilComponent implements OnInit {
           ),
         ]),
       },
-      [DateValidator.dateValidators]
+      [this.dateValidators()]
     );
 
     this.modalForm = new FormGroup({
@@ -271,8 +269,8 @@ export class PerfilComponent implements OnInit {
   onSubmitSearch() {
     let fechaDesdeValue = this.searchForm.value.fechaDesde;
     let fechaHastaValue = this.searchForm.value.fechaHasta;
-    fechaDesdeValue = DateValidator.parseToDateFormat(fechaDesdeValue);
-    fechaHastaValue = DateValidator.parseToDateFormat(fechaHastaValue);
+    fechaDesdeValue = this.parseToDateFormat(fechaDesdeValue);
+    fechaHastaValue = this.parseToDateFormat(fechaHastaValue);
     this.listasBuscadas = [
       {
         id: 1,
@@ -335,10 +333,8 @@ export class PerfilComponent implements OnInit {
   cargarLista(listId: number) {
     console.log(listId);
   }
-}
 
-export class DateValidator {
-  public static parseToDateFormat(date: string): Date {
+  parseToDateFormat(date: string): Date {
     const destructurDate = date.split('-');
     if (destructurDate[0].length === 1)
       destructurDate[0] = '0' + destructurDate[0];
@@ -350,18 +346,20 @@ export class DateValidator {
     );
     return result;
   }
-  public static dateValidators(form: FormGroup) {
-    let fechaFrom = form.get('fechaDesde').value;
-    let fechaTo = form.get('fechaHasta').value;
-    if (fechaFrom && fechaTo) {
-      fechaFrom = DateValidator.parseToDateFormat(fechaFrom);
-      fechaTo = DateValidator.parseToDateFormat(fechaTo);
-      if (fechaFrom <= fechaTo) {
-        return null;
-      } else {
-        // form.get('fechaHasta').setErrors({ dateValidators: true });
-        return { dateValidators: true };
+
+  dateValidators() {
+    return (form: FormGroup) => {
+      let fechaFrom = form.get('fechaDesde').value;
+      let fechaTo = form.get('fechaHasta').value;
+      if (fechaFrom && fechaTo) {
+        fechaFrom = this.parseToDateFormat(fechaFrom);
+        fechaTo = this.parseToDateFormat(fechaTo);
+        if (fechaFrom <= fechaTo) {
+          return null;
+        } else {
+          return { dateValidators: true };
+        }
       }
-    }
+    };
   }
 }

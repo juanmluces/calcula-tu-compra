@@ -4,6 +4,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { Product } from '../../interfaces/product';
 import { ngIfAnimate } from '../../animations/animations';
 import { ListasService } from 'src/app/services/listas.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 
 
@@ -16,7 +17,7 @@ import { ListasService } from 'src/app/services/listas.service';
 export class ProductsComponent implements OnInit {
   faSearch = faSearch;
   searchText: string;
-  category: string;
+  category: any;
   products: Product[];
   productsInList: Product[];
   scrollPosition: number;
@@ -25,12 +26,13 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private navbarService: NavbarService,
-    private listasService: ListasService
+    private listasService: ListasService,
+    private productsService: ProductsService
   ) {
 
     this.productsInList = this.listasService.getNewList();
     this.navbarService.showNavbar(true)
-    this.category = "Todos los productos"
+
     /* Placeholder array */
     this.products = [{
       "id": 1,
@@ -117,7 +119,11 @@ export class ProductsComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    this.category = await this.productsService.getSelectedCategory();
+    if (!this.category) {
+      this.category = { name: 'todos los productos' }
+    }
 
     this.productsInList.forEach(product => {
       this.products.find(producto => {

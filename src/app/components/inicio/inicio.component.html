@@ -12,13 +12,10 @@
     <p class="noHover">Inicia sesión</p>
     <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="form">
       <div class="form-group">
-        <label>Usuario (email)</label>
+        <label>Usuario</label>
         <input type="email" class="form-control" formControlName="username">
         <p class="text-danger" *ngIf="loginForm.get('username').hasError('required') && loginForm.get('username').touched">*Éste campo es
           requerido</p>
-        <p class="text-danger" *ngIf="loginForm.get('username').hasError('email') && loginForm.get('username').touched">*Introduce un
-          email
-          válido</p>
       </div>
       <div class="form-group">
         <label>Contraseña</label>
@@ -37,13 +34,10 @@
     <p class="noHover">Regístrate</p>
     <form [formGroup]="signUpForm" (ngSubmit)="onSignUpSubmit()" class="form">
       <div class="form-group">
-        <label>Usuario (email)</label>
-        <input type="email" class="form-control" formControlName="username">
+        <label>Usuario</label>
+        <input type="text" class="form-control" formControlName="username">
         <p class="text-danger" *ngIf="signUpForm.get('username').hasError('required') && signUpForm.get('username').touched">*Éste campo es
           requerido</p>
-        <p class="text-danger" *ngIf="signUpForm.get('username').hasError('email') && signUpForm.get('username').touched">*Introduce un
-          email
-          válido</p>
       </div>
       <div class="form-group">
         <label>Contraseña</label>

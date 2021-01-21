@@ -1,15 +1,15 @@
 <div #wrapper>
   <nav [@inAnimation] *ngIf="showNav">
-    <div routerLink="/inicio" class="logo-container">
+    <div class="logo-container">
       <img #logo src="{{logoUrl}}" alt="Coding Lights">
     </div>
     <ul [@navBarAnimate] (click)="closeNavbarMobile()" *ngIf="showMobileNav" class="nav-links">
       <li routerLink="/categorias" (click)="closeNavbarMobile()" routerLinkActive="active">Categorías</li>
       <li routerLink="/productos" (click)="closeNavbarMobile()" routerLinkActive="active">Productos</li>
-      <li routerLink="/mi-lista" routerLinkActive="active" (click)="closeNavbarMobile()">Mi Lista</li>
+      <li routerLink="/mi-lista" routerLinkActive="active" (click)="closeNavbarMobile()">En el super</li>
       <li *ngIf="logged" routerLink="/perfil" routerLinkActive="active" (click)="closeNavbarMobile()">Perfil</li>
       <li *ngIf="!logged" routerLink="/inicio" (click)="closeNavbarMobile()">Login</li>
-      <li (click)="closeNavbarMobile()">Conóceme</li>
+      <li routerLink="/conoceme" routerLinkActive="active" (click)="closeNavbarMobile()">Conóceme</li>
     </ul>
     <ul class="nav-list">
       <li routerLink="/config-lista" routerLinkActive="active" (click)="closeNavbarMobile()" class="list-logo">
