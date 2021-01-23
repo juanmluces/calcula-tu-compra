@@ -105,6 +105,10 @@ h2.titulo:hover {
   box-shadow: 3px 7px 10px -3px rgba(0, 0, 0, 0.75);
 }
 
+.products-container .product-card:last-child{
+  /* margin: auto; */
+}
+
 .img-container {
   position: relative;
   width: 60vw;

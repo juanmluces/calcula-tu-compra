@@ -67,12 +67,12 @@ export class ProductsComponent implements OnInit {
   }
 
   async search() {
+    this.virtualScroll.scrollToOffset(0);
     if (this.searchText) {
       this.productsToShow = await this.productsService.getProductsContainName(this.searchText);
     } else {
       this.ngOnInit()
     }
-    this.virtualScroll.scrollToOffset(0);
   }
 
   addProduct(pProduct) {
