@@ -29,7 +29,7 @@ ngb-alert.success-alert {
 }
 
 div.img-container {
-  max-width: 200px;
+  max-width: 150px;
   margin: auto;
   margin-bottom: 1em;
   border-radius: 50%;
@@ -119,10 +119,11 @@ input.mi-boton {
   width: 200px;
 }
 
-button.boton-borrar-fechas {
+button.boton-borrar-fechas, button.logout {
   margin-top: 1em;
   width: 200px;
 }
+
 
 .listas-buscadas-contenedor {
   width: 90%;
@@ -293,7 +294,7 @@ div.contenedor-perfil-desktop {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin: 1em auto;
+    margin: 1em auto 0;
   }
 
   div.contenedor-perfil-desktop .profile-container:nth-child(1) {

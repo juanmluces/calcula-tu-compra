@@ -12,6 +12,8 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~11.0.5",
+    "@angular/cdk": "^11.1.0",
+    "@angular/cdk-experimental": "^11.1.0",
     "@angular/common": "~11.0.5",
     "@angular/compiler": "~11.0.5",
     "@angular/core": "~11.0.5",
@@ -31,6 +33,7 @@
     "chart.js": "^2.9.4",
     "jquery": "^3.5.1",
     "ngx-perfect-scrollbar": "^10.1.0",
+    "ngx-virtual-scroller": "^4.0.3",
     "primeicons": "^4.1.0",
     "primeng": "^11.1.0",
     "rxjs": "~6.6.0",

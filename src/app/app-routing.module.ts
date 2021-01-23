@@ -7,6 +7,7 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { MiListaComponent } from './components/mi-lista/mi-lista.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { ProductsComponent } from './components/products/products.component';
+import { LoggedGuard } from './guards/logged.guard';
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
@@ -17,7 +18,8 @@ const routes: Routes = [
   },
   {
     path: 'inicio', component: InicioComponent,
-    data: { animation: 'inicio' }
+    data: { animation: 'inicio' },
+    canActivate: [LoggedGuard]
   },
   {
     path: 'categorias',

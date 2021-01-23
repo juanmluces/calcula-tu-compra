@@ -60,7 +60,12 @@
             </div>
             <input type="submit" value="Buscar Listas" class="btn btn-primary mi-boton" [disabled]="!searchForm.valid">
             <button [disabled]="!searchForm.get('fechaHasta').value && !searchForm.get('fechaDesde').value && !searchText" (click)="borrarFechas()" type="button" class="btn mi-boton btn-info boton-borrar-fechas">Borrar búsquedas</button>
-          </form>         
+          </form>
+          <div class="d-flex justify-content-center">
+            <button (click)="logOut()" class="btn logout btn-danger rounded">Cerrar Sesión
+              <fa-icon [icon]="faSingOut"></fa-icon>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -71,10 +76,10 @@
             <ul [@inAnimation2] *ngIf="!listasBuscadas">
               <li> - No hay listas -</li>
             </ul>
-           
+
             <perfect-scrollbar [@inAnimation2] *ngIf="listasBuscadas" [config]="config">
               <ul>
-                <li  (click)="cargarLista(lista.id)" [attr.data-id]="lista.id" *ngFor="let lista of listasBuscadas; let index = index">
+                <li (click)="cargarLista(lista.id)" [attr.data-id]="lista.id" *ngFor="let lista of listasBuscadas; let index = index">
                   <span> -{{lista.titulo}} </span> &nbsp; <span>{{lista.fecha | date:'dd/MM/yyyy '}}</span>
                 </li>
               </ul>

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Product } from '../interfaces/product';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,14 @@ export class ProductsService {
 
   constructor(private httpClient: HttpClient) {
     this.baseUrl = 'http://localhost:3000/products/';
+  }
+
+  getAllProducts(): Promise<[Product]> {
+    return this.httpClient.get<[Product]>(this.baseUrl).toPromise()
+  }
+
+  getProductsContainName(pName: string): Promise<[Product]> {
+    return this.httpClient.get<[Product]>(this.baseUrl + `search/${pName}`).toPromise()
   }
 
   getAllCategories(): Promise<[any]> {

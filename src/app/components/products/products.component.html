@@ -9,27 +9,30 @@
         <span>&nbsp;Busca un producto</span>
       </div>
     </div>
-    <div #productsContainer class="products-container" (scroll)="onScroll($event)">
-      <app-scroll-to-top [@inAnimation] (click)="scrollTop()" *ngIf="scrollPosition"></app-scroll-to-top>
-      <div *ngFor="let product of products" class="product-card">
-        <div class="img-container">
-          <img [src]="product.imagen" [alt]="product.nombre">
-          <div class="price-tag">
-            <p>{{product.precio}}€</p>
+
+    <app-scroll-to-top [@inAnimation] (click)="scrollTop()" *ngIf="scrollPosition"></app-scroll-to-top>
+    <cdk-virtual-scroll-viewport class="viewport" (scroll)="onScroll($event)" autosize>
+      <div #productsContainer class="products-container">
+        <div *cdkVirtualFor="let product of productsToShow" class="product-card">
+          <div class="img-container">
+            <img [src]="product.imagen" [alt]="product.nombre">
+            <div class="price-tag">
+              <p>{{product.precio}}€</p>
+            </div>
+            <div [@inAnimation] *ngIf="product.cantidad === 1" class="cantidad-tag">
+              <p>{{product.cantidad}} Agregado</p>
+            </div>
+            <div [@inAnimation] *ngIf="product.cantidad > 1" class="cantidad-tag">
+              <p>{{product.cantidad}} Agregados</p>
+            </div>
           </div>
-          <div [@inAnimation] *ngIf="product.cantidad === 1" class="cantidad-tag">
-            <p>{{product.cantidad}} Agregado</p>
+          <div class="product-texts">
+            <p>{{product.marca}}</p>
+            <p>{{product.nombre}}</p>
+            <p>{{product.descripcion}} </p>
           </div>
-          <div [@inAnimation] *ngIf="product.cantidad > 1" class="cantidad-tag">
-            <p>{{product.cantidad}} Agregados</p>
-          </div>
+          <button (click)="addProduct(product)" class="mi-boton btn btn-info">Añadir</button>
         </div>
-        <div class="product-texts">
-          <p>{{product.marca}}</p>
-          <p>{{product.nombre}}</p>
-          <p>{{product.descripcion}} </p>
-        </div>
-        <button (click)="addProduct(product)" class="mi-boton btn btn-info">Añadir</button>
       </div>
-    </div>
+    </cdk-virtual-scroll-viewport>
   </div>

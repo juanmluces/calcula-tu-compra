@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import {
   NgbDateAdapter,
   NgbDateParserFormatter,
@@ -23,6 +23,8 @@ import {
   PerfectScrollbarConfigInterface,
   PERFECT_SCROLLBAR_CONFIG,
 } from 'ngx-perfect-scrollbar';
+import { Router } from '@angular/router';
+
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   wheelPropagation: true,
@@ -45,6 +47,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 export class PerfilComponent implements OnInit {
   faSearch = faSearch;
   faEdit = faEdit;
+  faSingOut = faSignOutAlt;
   closeResult = '';
   private _success = new Subject<string>();
   staticAlertClosed = false;
@@ -64,7 +67,8 @@ export class PerfilComponent implements OnInit {
   constructor(
     private navbarService: NavbarService,
     private modalService: NgbModal,
-    private listasService: ListasService
+    private listasService: ListasService,
+    private router: Router
   ) {
     this.data = {
       labels: [
@@ -362,4 +366,12 @@ export class PerfilComponent implements OnInit {
       }
     };
   }
+
+  logOut() {
+    localStorage.removeItem('user_token');
+    this.navbarService.showLogin(true);
+    this.router.navigate(['/inicio']);
+  }
+
+
 }

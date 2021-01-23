@@ -5,6 +5,7 @@
   transition: all .2s ease-in-out;
   background-color: var(--secondary-color);
   border-radius: 7px;
+  z-index: 10000;
  }
  .show-scrollTop {
   opacity: 1;
