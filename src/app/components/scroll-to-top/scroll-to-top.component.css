@@ -1,7 +1,7 @@
 .scroll-to-top {
-  position: fixed;
-  bottom: 15px;
+  position: absolute;
   right: 50px;
+
   transition: all .2s ease-in-out;
   background-color: var(--secondary-color);
   border-radius: 7px;
@@ -22,4 +22,10 @@
 
  .scroll-to-top:hover, .scroll-to-top:focus, .scroll-to-top:active{
   background-color: var(--secondary-color-hover);
+ }
+
+ @media(max-width: 800px){
+   .scroll-to-top{
+     right: 5vw;
+   }
  }

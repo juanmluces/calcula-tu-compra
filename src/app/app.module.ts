@@ -18,9 +18,6 @@ import { MiListaComponent } from './components/mi-lista/mi-lista.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { ChartModule } from 'primeng/chart';
 import { ConocemeComponent } from './components/conoceme/conoceme.component';
-import { ScrollingModule } from '@angular/cdk/scrolling';
-import { ScrollingModule as ExperimentalScrollingModule } from '@angular/cdk-experimental/scrolling';
-import { VirtualScrollerModule } from 'ngx-virtual-scroller'
 
 
 @NgModule({
@@ -45,10 +42,7 @@ import { VirtualScrollerModule } from 'ngx-virtual-scroller'
     PerfectScrollbarModule,
     NgbModule,
     ChartModule,
-    HttpClientModule,
-    ScrollingModule,
-    ExperimentalScrollingModule,
-    VirtualScrollerModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

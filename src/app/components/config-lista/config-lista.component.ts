@@ -16,7 +16,9 @@ import { ListasService } from 'src/app/services/listas.service';
 })
 export class ConfigListaComponent implements OnInit {
   private _success = new Subject<string>();
+  private _error = new Subject<string>();
   successMessage = '';
+  errorMessage = '';
   faTrashAlt = faTrashAlt;
   faMinus = faMinus;
 
@@ -24,8 +26,10 @@ export class ConfigListaComponent implements OnInit {
   total: number;
   presupuesto: number;
   nombreLista: string;
+  userId: number;
 
   @ViewChild('selfClosingAlert', { static: false }) selfClosingAlert: NgbAlert;
+  @ViewChild('selfClosingAlert2', { static: false }) selfClosingAlert2: NgbAlert;
 
 
   constructor(
@@ -45,12 +49,26 @@ export class ConfigListaComponent implements OnInit {
         this.selfClosingAlert.close();
       }
     });
+    this._error.subscribe(message => this.errorMessage = message);
+    this._error.pipe(debounceTime(3000)).subscribe(() => {
+      if (this.selfClosingAlert2) {
+        this.selfClosingAlert2.close();
+      }
+    });
+
+
     this.total = this.listasService.calculateTotal(this.productsInList)
     if (localStorage.getItem('nombreLista')) {
       this.nombreLista = localStorage.getItem('nombreLista')
     }
     if (localStorage.getItem('presupuesto')) {
       this.presupuesto = parseInt(localStorage.getItem('presupuesto'))
+    }
+
+    if (localStorage.getItem('user_id')) {
+      this.userId = parseInt(localStorage.getItem('user_id'))
+    } else {
+      this.userId = 0;
     }
   }
 
@@ -79,27 +97,44 @@ export class ConfigListaComponent implements OnInit {
     }
   }
 
-  onGuardarLista() {
-    const productsIdList = [];
-    for (let product of this.productsInList) {
-      if (product.cantidad > 1) {
-        for (let i = 1; i <= product.cantidad; i++) {
-          productsIdList.push(product.id)
+  async onGuardarLista() {
+    if (!this.userId) {
+      this._error.next('debes iniciar sesión para guardar listas');
+    } else {
+      try {
+        if (!this.nombreLista) this.nombreLista = "Mi Lista"
+        const result = await this.listasService.saveNewList(this.userId, this.nombreLista);
+        // console.log(result)
+        const productsIdList = [];
+        for (let product of this.productsInList) {
+          if (product.cantidad > 1) {
+            for (let i = 1; i <= product.cantidad; i++) {
+              productsIdList.push(product.id)
+            }
+          } else {
+            productsIdList.push(product.id)
+          }
         }
-      } else {
-        productsIdList.push(product.id)
-
+        this.listasService.emptyNewList();
+        this.productsInList = [];
+        this.total = 0;
+        this._success.next(`La lista "${this.nombreLista}" se ha guardado correctamente!`);
+        this.nombreLista = ""
+        this.presupuesto = null;
+        localStorage.setItem('nombreLista', this.nombreLista);
+        localStorage.setItem('presupuesto', null);
+      } catch (error) {
+        this.listasService.emptyNewList();
+        this._error.next('Ha ocurrido un error');
+        this.productsInList = [];
+        this.nombreLista = ""
+        this.presupuesto = null;
+        this.total = 0;
+        localStorage.setItem('nombreLista', this.nombreLista);
+        localStorage.setItem('presupuesto', null);
+        // return console.log(error.error)
       }
     }
-    this.listasService.emptyNewList();
-    this.productsInList = [];
-    this.total = 0;
-    if (!this.nombreLista) this.nombreLista = "Mi Lista"
-    this._success.next(`La lista "${this.nombreLista}" se ha guardado correctamente!`);
-    this.nombreLista = ""
-    this.presupuesto = null;
-    localStorage.setItem('nombreLista', this.nombreLista);
-    localStorage.setItem('presupuesto', null);
 
 
   }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../interfaces/product';
+import { ProductsObject } from '../interfaces/ProductsObject';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,17 @@ export class ProductsService {
     this.baseUrl = 'http://localhost:3000/products/';
   }
 
-  getAllProducts(): Promise<[Product]> {
-    return this.httpClient.get<[Product]>(this.baseUrl).toPromise()
+  getAllProductsByPage(pPage: number): Promise<ProductsObject> {
+    return this.httpClient.get<ProductsObject>(this.baseUrl + `page/${pPage}`).toPromise()
   }
 
-  getProductsContainName(pName: string): Promise<[Product]> {
-    return this.httpClient.get<[Product]>(this.baseUrl + `search/${pName}`).toPromise()
+  getAllProductsByCategoryByPage(pPage: number): Promise<ProductsObject> {
+    console.log(this.categorySelected, pPage)
+    return this.httpClient.get<ProductsObject>(this.baseUrl + `categoryid/${this.categorySelected}/page/${pPage}`).toPromise()
+  }
+
+  getProductsContainNameByPage(pName: string, pPage: number): Promise<ProductsObject> {
+    return this.httpClient.get<ProductsObject>(this.baseUrl + `search/${pName}/page/${pPage}`).toPromise()
   }
 
   getAllCategories(): Promise<[any]> {

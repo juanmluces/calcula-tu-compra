@@ -1,3 +1,8 @@
+<ngb-alert [@bsInAnimation] class="success-alert" #selfClosingAlert *ngIf="successMessage" type="success" (closed)="successMessage = ''">{{ successMessage }}
+</ngb-alert>
+<ngb-alert [@bsInAnimation] class="success-alert" #selfClosingAlert2 *ngIf="errorMessage" type="danger" (closed)="errorMessage = ''">{{ errorMessage }}
+</ngb-alert>
+
 <h1>Calcula Tu Compra!</h1>
 
 

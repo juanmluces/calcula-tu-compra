@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ngIfAnimate } from 'src/app/animations/animations';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { bootstrapAnimateAlert, ngIfAnimate } from 'src/app/animations/animations';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -9,14 +12,21 @@ import { UsersService } from 'src/app/services/users.service';
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css'],
-  animations: [ngIfAnimate],
+  animations: [ngIfAnimate, bootstrapAnimateAlert],
 })
 export class InicioComponent implements OnInit {
+  private _success = new Subject<string>();
+  private _error = new Subject<string>();
+  successMessage = '';
+  errorMessage = '';
   loginForm: FormGroup;
   signUpForm: FormGroup;
   homeBox: boolean;
   loginBox: boolean;
   signUpBox: boolean;
+
+  @ViewChild('selfClosingAlert', { static: false }) selfClosingAlert: NgbAlert;
+  @ViewChild('selfClosingAlert2', { static: false }) selfClosingAlert2: NgbAlert;
 
   constructor(
     private navbarService: NavbarService,
@@ -43,16 +53,35 @@ export class InicioComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+
+    this._success.subscribe(message => this.successMessage = message);
+    this._success.pipe(debounceTime(3000)).subscribe(() => {
+      if (this.selfClosingAlert) {
+        this.selfClosingAlert.close();
+      }
+    });
+    this._error.subscribe(message => this.errorMessage = message);
+    this._error.pipe(debounceTime(3000)).subscribe(() => {
+      if (this.selfClosingAlert2) {
+        this.selfClosingAlert2.close();
+      }
+    });
+
+
+
+  }
 
   async onLoginSubmit() {
     const loginUser = this.loginForm.value;
     const result = await this.usersService.loginUser(loginUser);
-    console.log(result);
     if (result.error) {
-      alert(result.error);
+      this._error.next(result.error);
+      // alert(result.error);
     } else {
-      alert(result.success);
+      this._success.next(result.success);
+      // alert(result.success);
+      localStorage.setItem('user_id', JSON.stringify(result.userId))
       localStorage.setItem('user_token', JSON.stringify(result.token));
       this.navbarService.showLogin(false);
       this.router.navigate(['/categorias']);

@@ -120,6 +120,8 @@ body {
 div.wrapper {
   max-width: 2200px;
   padding-top: 0.1rem;
+  margin: auto;
+  position: relative;
 }
 
 div.dark-layer {
@@ -280,7 +282,26 @@ h2.titulo {
   display: none;
 }
 
+.mobile-pagination{
+  display: none;
+
+}
+
+.desktop-pagination{
+  display: flex;
+}
+
 @media (max-width: 800px) {
+
+  .mobile-pagination{
+    display: flex;
+  
+  }
+  
+  .desktop-pagination{
+    display: none;
+  }
+
   div.dark-layer {
     min-height: calc(100vh - 50px);
     padding-bottom: 0.1px;
@@ -295,4 +316,48 @@ h2.titulo {
     position: relative;
     top: 1em;
   }
+  
 }
+
+ngb-alert.success-alert{
+  max-width: 500px;
+  margin: auto;
+  top: 1em;
+}
+
+.pagination {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+
+.pagination > li > a
+{
+    background-color: white;
+    color: var(--primary-color);
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a;
+    background-color: #eee;
+    border-color: #ddd;
+    box-shadow: var(--secondary-color);
+}
+
+.pagination > .active > a
+{
+    color: white;
+    background-color: var(--primary-color) !Important;
+    border: solid 1px var(--primary-color) !Important;
+}
+
+.pagination > .active > a:hover
+{
+    background-color: var(--primary-color) !Important;
+    border: solid 1px var(--primary-color);
+}
+

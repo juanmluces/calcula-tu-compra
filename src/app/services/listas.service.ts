@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { Observable, Subject } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,12 @@ import { Observable, Subject } from 'rxjs';
 export class ListasService {
 
   newList: Product[];
+  baseUrl: string;
   listHasItems$ = new Subject<boolean>();
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.newList = [];
+    this.baseUrl = 'http://localhost:3000/lists/';
   }
 
   showPlusIcon(pShowIcon: boolean) {
@@ -33,8 +36,48 @@ export class ListasService {
     }
   }
 
+  saveNewList(pUserId, pNombreLista): Promise<any> {
+    const formattedList = [];
+    this.newList.forEach(product => {
+      if (product.cantidad > 1) {
+        for (let cantidad = 1; cantidad <= product.cantidad; cantidad++) {
+          formattedList.push(product.id)
+        }
+      } else {
+        formattedList.push(product.id)
+      }
+    })
+    this.newList = [];
+
+    const body = {
+      "title": pNombreLista,
+      "userid": pUserId,
+      "products": formattedList
+    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('user_token')
+      })
+    }
+    return this.httpClient.post(this.baseUrl + 'create', body, httpOptions).toPromise();
+  }
+
   getNewList(): Product[] {
     return this.newList
+  }
+
+  getLastList(): Promise<any> {
+    const body = {
+      "userid": localStorage.getItem('user_id')
+    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('user_token')
+      })
+    }
+    return this.httpClient.post<any>(this.baseUrl + 'last', body, httpOptions).toPromise()
+
+
   }
 
   removeProductNewList(pId: number, pAll: boolean = false): void {

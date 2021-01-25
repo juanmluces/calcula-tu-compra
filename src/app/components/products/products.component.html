@@ -10,10 +10,14 @@
       </div>
     </div>
 
-    <app-scroll-to-top [@inAnimation] (click)="scrollTop()" *ngIf="scrollPosition"></app-scroll-to-top>
-    <cdk-virtual-scroll-viewport class="viewport" (scroll)="onScroll($event)" autosize>
-      <div #productsContainer class="products-container">
-        <div *cdkVirtualFor="let product of productsToShow" class="product-card">
+    <app-scroll-to-top class="scroll-top" [@inAnimation] (click)="scrollToTop()" *ngIf="windowScrolled"></app-scroll-to-top>
+    <main #viewport class="viewport" (scroll)="onScroll($event)" autosize>
+      <ngb-pagination *ngIf="productsToShow.maxPages" size="sm" (pageChange)="changePage($event)" class="mobile-pagination justify-content-center" [collectionSize]="(maxPages * 10)" [maxSize]="3" [rotate]="true" [ellipses]="true" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+      <ngb-pagination *ngIf="productsToShow.maxPages" (pageChange)="changePage($event)" class="desktop-pagination justify-content-center" [collectionSize]="(maxPages * 10)" [maxSize]="3" [rotate]="true" [ellipses]="true" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+
+      <h2 [@inAnimation] *ngIf="!productsToShow.maxPages" class="text-light text-center pt-5">No se encontraron productos. . .</h2>
+      <div *ngIf="productsToShow" class="products-container">
+        <div *ngFor="let product of productsToShow.products" class="product-card">
           <div class="img-container">
             <img [src]="product.imagen" [alt]="product.nombre">
             <div class="price-tag">
@@ -34,5 +38,8 @@
           <button (click)="addProduct(product)" class="mi-boton btn btn-info">Añadir</button>
         </div>
       </div>
-    </cdk-virtual-scroll-viewport>
+      <ngb-pagination *ngIf="productsToShow.maxPages" size="sm" (pageChange)="changePage($event)" class="mobile-pagination justify-content-center" [collectionSize]="(maxPages * 10)" [maxSize]="3" [rotate]="true" [ellipses]="true" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+      <ngb-pagination *ngIf="productsToShow.maxPages" (pageChange)="changePage($event)" class="desktop-pagination justify-content-center" [collectionSize]="(maxPages * 10)" [maxSize]="3" [rotate]="true" [ellipses]="true" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+    </main>
   </div>
+</div>

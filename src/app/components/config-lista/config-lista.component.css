@@ -127,11 +127,7 @@ div.button-container{
   width: 100%;
 }
 
-ngb-alert.success-alert{
-  max-width: 500px;
-  margin: auto;
-  top: 1em;
-}
+
 
 @media(min-width: 520px){
   div.footer-control{

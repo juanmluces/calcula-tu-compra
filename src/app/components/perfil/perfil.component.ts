@@ -369,6 +369,7 @@ export class PerfilComponent implements OnInit {
 
   logOut() {
     localStorage.removeItem('user_token');
+    localStorage.removeItem('user_id');
     this.navbarService.showLogin(true);
     this.router.navigate(['/inicio']);
   }
