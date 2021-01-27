@@ -231,33 +231,19 @@ export class PerfilComponent implements OnInit {
   }
 
 
-  onSubmitSearch() {
+  async onSubmitSearch() {
     let fechaDesdeValue = this.searchForm.value.fechaDesde;
     let fechaHastaValue = this.searchForm.value.fechaHasta;
-    fechaDesdeValue = this.parseToDateFormat(fechaDesdeValue);
-    fechaHastaValue = this.parseToDateFormat(fechaHastaValue);
-    this.listasBuscadas = [
-      {
-        id: 1,
-        titulo: 'Mi Lista',
-        fecha: '2020-10-25 15:53:11',
-        fk_usuario: 1,
-      },
-      {
-        id: 2,
-        titulo: 'Mi Lista',
-        fecha: '2020-10-25 15:53:11',
-        fk_usuario: 1,
-      },
-      {
-        id: 3,
-        titulo: 'Mi Lista',
-        fecha: '2020-10-25 15:53:11',
-        fk_usuario: 1,
-      },
-    ];
-
+    fechaDesdeValue = this.parseToStringFormat(fechaDesdeValue);
+    fechaHastaValue = this.parseToStringFormat(fechaHastaValue);
     console.log({ fechaDesdeValue, fechaHastaValue });
+
+    try {
+      this.listasBuscadas = await this.perfilService.getListDateRange(fechaDesdeValue, fechaHastaValue);
+
+    } catch (error) {
+      console.warn(error);
+    }
   }
 
   async onModalSubmit() {
@@ -340,6 +326,16 @@ export class PerfilComponent implements OnInit {
       parsedDate.replace(/(\d{2})-(\d{2})-(\d{4})/, '$2/$1/$3')
     );
     return result;
+  }
+
+  parseToStringFormat(date: string): string {
+    const destructurDate = date.split('-');
+    if (destructurDate[0].length === 1)
+      destructurDate[0] = '0' + destructurDate[0];
+    if (destructurDate[1].length === 1)
+      destructurDate[1] = '0' + destructurDate[1];
+    let parsedDate = [destructurDate[2], destructurDate[1], destructurDate[0]].join('/');
+    return parsedDate;
   }
 
   dateValidators() {

@@ -7,6 +7,9 @@ div.conoceme-perfil {
   padding: 2em;
   margin-bottom: 2em;
 }
+div.dark-layer {
+  padding: 1px;
+}
 
 h2.titulo {
   top: 0;

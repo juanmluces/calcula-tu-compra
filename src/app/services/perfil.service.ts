@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Lista } from '../interfaces/lista';
 import { Product } from '../interfaces/product';
 
 @Injectable({
@@ -95,6 +96,23 @@ export class PerfilService {
     }
 
     return this.httpClient.post<Product[]>(this.baseUrl + 'getsearchedlist', body, httpOptions).toPromise()
+  }
+
+
+  getListDateRange(pDateFrom: string, pDateTo: string): Promise<Lista[]> {
+    const body = {
+      userid: localStorage.getItem('user_id'),
+      dateFrom: pDateFrom,
+      dateTo: pDateTo
+    }
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('user_token')
+      })
+    }
+    return this.httpClient.post<Lista[]>(this.baseUrl + 'listdaterange', body, httpOptions).toPromise();
+
   }
 
 }
