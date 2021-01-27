@@ -5,6 +5,7 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { bootstrapAnimateAlert, ngIfAnimate } from 'src/app/animations/animations';
+import { ListasService } from 'src/app/services/listas.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -31,7 +32,7 @@ export class InicioComponent implements OnInit {
   constructor(
     private navbarService: NavbarService,
     private usersService: UsersService,
-    private router: Router
+    private router: Router,
   ) {
     this.homeBox = true;
     this.loginBox = false;
@@ -77,10 +78,8 @@ export class InicioComponent implements OnInit {
     const result = await this.usersService.loginUser(loginUser);
     if (result.error) {
       this._error.next(result.error);
-      // alert(result.error);
     } else {
       this._success.next(result.success);
-      // alert(result.success);
       localStorage.setItem('user_id', JSON.stringify(result.userId))
       localStorage.setItem('user_token', JSON.stringify(result.token));
       this.navbarService.showLogin(false);

@@ -29,8 +29,8 @@
           requerido</p>
       </div>
       <div class="buttons">
-        <button (click)="onVolver($event)">Volver</button>
         <input type="submit" value="Iniciar sesión" [ngClass]="{'submit-off': !loginForm.valid}" btn-block btn-success [disabled]="!loginForm.valid">
+        <button (click)="onVolver($event)">Volver</button>
       </div>
     </form>
 
@@ -53,8 +53,8 @@
           debe ser de al menos 4 caracteres</p>
       </div>
       <div class="buttons">
-        <button (click)="onVolver($event)">Volver</button>
         <input type="submit" value="Regístrate" [ngClass]="{'submit-off': !signUpForm.valid}" btn-block btn-success [disabled]="!signUpForm.valid">
+        <button (click)="onVolver($event)">Volver</button>
       </div>
     </form>
 

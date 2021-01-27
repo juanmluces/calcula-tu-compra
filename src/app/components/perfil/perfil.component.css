@@ -29,17 +29,23 @@ ngb-alert.success-alert {
 }
 
 div.img-container {
-  max-width: 150px;
+ width: 150px;
+ height: 150px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
   margin: auto;
   margin-bottom: 1em;
   border-radius: 50%;
   overflow: hidden;
   border: 0.5em solid var(--neutral-color);
-  padding: 1em;
+  /* padding: 1em; */
 }
 
 div.img-container img {
   border-radius: 50%;
+  height: 100%;
+  object-fit: cover;
 }
 
 div.avatar-container hr {
@@ -165,7 +171,19 @@ button.boton-borrar-fechas, button.logout {
   background-color: whitesmoke;
 }
 
+.listas-buscadas li.no-list{
+  cursor: unset;  
+  color: gray
+}
+
+.listas-buscadas li.no-list:hover{
+  text-decoration: none;
+  color: gray;
+  background-color: inherit;
+}
+
 div.container-list {
+  position: relative;
   background-color: whitesmoke;
   width: 80%;
   margin: 2em auto;
@@ -174,12 +192,48 @@ div.container-list {
   -webkit-box-shadow: 5px 5px 25px 3px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 5px 5px 25px 3px rgba(0, 0, 0, 0.75);
   box-shadow: 5px 5px 25px 3px rgba(0, 0, 0, 0.75);
+
 }
 
 div.container-list p {
   font-size: 0.8rem;
   text-align: center;
   margin: 0;
+}
+
+div.star-container{
+  right: 1em;
+  position: absolute;
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+div.star-container:hover fa-icon.star-icon{
+  color: #ffc107 !important;
+}
+div.star-container:hover fa-icon.star-icon.text-warning{
+  color: #ffc10754 !important;
+}
+
+fa-icon.star-icon{
+  position: absolute;
+  transition: ease-in-out 150ms;
+}
+
+fa-icon.star-icon.text-warning{
+  z-index: 100;
+ 
+}
+
+fa-icon.star-list{
+ position: relative;
+ margin-left: -2em;
+ padding-right: 1em;
 }
 
 @media (max-width: 400px) {
@@ -203,9 +257,11 @@ div.container-list hr {
 .lista-productos ul {
   display: flex;
   padding: 1em 0;
+  padding-top: 2.5em;
   flex-direction: column;
   width: 80%;
   margin: auto;
+
 }
 
 .lista-productos ul li {
@@ -219,6 +275,9 @@ div.container-list hr {
 .lista-productos ul li span {
   margin: 0 0.25rem;
 }
+
+
+
 
 span.nombre-producto {
   text-align: left;

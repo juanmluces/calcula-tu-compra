@@ -45,6 +45,8 @@
         </div>
         <div class="button-container">
           <button (click)="onGuardarLista()" [disabled]="!productsInList.length" class="guardar-button mi-boton btn btn-primary">Guardar Lista</button>
+          <button (click)="cargarListaFav()" [disabled]="productsInList.length || !userId" class="guardar-button mi-boton btn btn-info">Lista Favorita</button>
+          <button (click)="borrarLista()" [disabled]="!productsInList.length" class="guardar-button mi-boton btn-danger btn my-danger">Borrar Lista</button>
         </div>
       </div>
     </div>

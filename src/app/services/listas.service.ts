@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../interfaces/product';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Lista } from '../interfaces/lista';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ export class ListasService {
   newList: Product[];
   baseUrl: string;
   listHasItems$ = new Subject<boolean>();
+  userHasFavorite$ = new Subject<boolean>();
 
   constructor(private httpClient: HttpClient) {
     this.newList = [];
@@ -19,6 +21,14 @@ export class ListasService {
 
   showPlusIcon(pShowIcon: boolean) {
     this.listHasItems$.next(pShowIcon)
+  }
+
+  showStarIcon(pShowStar: boolean) {
+    this.userHasFavorite$.next(pShowStar)
+  }
+
+  getFavoriteStatus$(): Observable<boolean> {
+    return this.userHasFavorite$.asObservable();
   }
 
   getPlusIconStatus$(): Observable<boolean> {
@@ -66,7 +76,7 @@ export class ListasService {
     return this.newList
   }
 
-  getLastList(): Promise<any> {
+  getLastList(): Promise<Lista> {
     const body = {
       "userid": localStorage.getItem('user_id')
     }
@@ -80,7 +90,22 @@ export class ListasService {
 
   }
 
+  getFavoriteList(): Promise<Lista> {
+    const body = {
+      "userid": localStorage.getItem('user_id')
+    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('user_token')
+      })
+    }
+    return this.httpClient.post<Lista>(this.baseUrl + 'favorite', body, httpOptions).toPromise();
+  }
+
+
+
   removeProductNewList(pId: number, pAll: boolean = false): void {
+    this.showStarIcon(false);
     if (pAll) {
       const index = this.newList.findIndex(product => product.id === pId);
       this.newList.splice(index, 1);
@@ -90,18 +115,43 @@ export class ListasService {
     }
   }
 
+  async loadFavoriteList() {
+    const favList = await this.getFavoriteList();
+    if (favList) {
+      this.showStarIcon(true);
+      favList.productos.forEach(producto => {
+        if (producto.cantidad > 1) {
+          for (let cantidad = 1; cantidad <= producto.cantidad; cantidad++) {
+            this.addProductToList(producto)
+          }
+        } else {
+          this.addProductToList(producto)
+        }
+      });
+      this.showPlusIcon(false)
+    } else {
+      this.showStarIcon(false)
+    }
+  }
+
   emptyNewList(): void {
-    this.showPlusIcon(false)
     this.newList = [];
+    this.showPlusIcon(false)
+    this.showStarIcon(false)
   }
 
   calculateTotal(pProductList) {
     let result = 0;
-    for (let product of pProductList) {
-      result += (product.cantidad * product.precio)
+    if (pProductList) {
+      for (let product of pProductList) {
+        result += (product.cantidad * product.precio)
+      }
+
     }
     return result
   }
+
+
 
 
 

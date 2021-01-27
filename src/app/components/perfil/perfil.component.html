@@ -3,6 +3,8 @@
     <!-- modal -->
     <ngb-alert #selfClosingAlert class="success-alert" *ngIf="successMessage" type="success" (closed)="successMessage = ''">{{ successMessage }}
     </ngb-alert>
+    <ngb-alert #selfClosingAlert2 class="success-alert" *ngIf="errorsMessage" type="danger" (closed)="errorsMessage = ''">{{ errorsMessage }}
+    </ngb-alert>
     <ng-template #content let-modal>
       <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Subir un avatar</h4>
@@ -35,9 +37,9 @@
       <div class="profile-container">
         <div class="avatar-container">
           <div class="img-container">
-            <img src="../../../assets/svg/user-gray.svg" alt="">
+            <img [src]='imgUrl' [alt]="username + ' avatar'">
           </div>
-          <p class="username">username@username.com</p>
+          <p class="username">{{username}}</p>
           <hr>
           <fa-icon (click)="open(content)" class="edit-icon" [icon]="faEdit"></fa-icon>
         </div>
@@ -74,12 +76,13 @@
           <div class="listas-buscadas">
             <p>Búsquedas</p>
             <ul [@inAnimation2] *ngIf="!listasBuscadas">
-              <li> - No hay listas -</li>
+              <li class="no-list"> - No hay listas -</li>
             </ul>
 
             <perfect-scrollbar [@inAnimation2] *ngIf="listasBuscadas" [config]="config">
               <ul>
-                <li (click)="cargarLista(lista.id)" [attr.data-id]="lista.id" *ngFor="let lista of listasBuscadas; let index = index">
+                <li (click)="cargarLista(lista)" [attr.data-id]="lista.id" *ngFor="let lista of listasBuscadas; let index = index">
+                  <fa-icon [@inAnimation] *ngIf="lista.id === listaFavId" class="plus-icon star-icon text-warning star-list" [icon]="faStar"></fa-icon>
                   <span> -{{lista.titulo}} </span> &nbsp; <span>{{lista.fecha | date:'dd/MM/yyyy '}}</span>
                 </li>
               </ul>
@@ -95,6 +98,10 @@
       </div>
 
       <div [@inAnimation] *ngIf="listaCargada" class="container-list">
+        <div class="star-container" (click)="toggleFavorite()">
+          <fa-icon [@inAnimation] *ngIf="showStarFav" class="plus-icon star-icon text-warning" [icon]="faStar"></fa-icon>
+          <fa-icon class="plus-icon star-icon text-dark" [icon]="faStarOutline"></fa-icon>
+        </div>
         <h3>{{listaCargada.titulo}}</h3>
         <hr>
         <p>{{listaCargada.fecha | date}}</p>

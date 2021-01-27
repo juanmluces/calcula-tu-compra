@@ -69,6 +69,11 @@ li.list-logo fa-icon.plus-icon{
   bottom: 0.5em;
 }
 
+fa-icon.star-icon{
+  bottom: unset;
+  top: 0.125em;
+}
+
 ul.nav-links li.active, ul.nav-list li.active{
   cursor:inherit;
   color: white;

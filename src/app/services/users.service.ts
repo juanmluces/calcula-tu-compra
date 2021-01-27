@@ -1,6 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { ListasService } from './listas.service';
+import { NavbarService } from './navbar.service';
+
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +13,13 @@ export class UsersService {
 
 
 
-  constructor(private httpClient: HttpClient) {
+
+  constructor(private httpClient: HttpClient,
+    private navbarService: NavbarService,
+    private router: Router,
+    private listasService: ListasService) {
     this.baseUrl = 'http://localhost:3000/users/';
+
   }
 
   createUser(pUser): Promise<any> {
@@ -23,4 +31,15 @@ export class UsersService {
   loginUser(pUser): Promise<any> {
     return this.httpClient.post<any>(this.baseUrl + 'login', pUser).toPromise();
   }
+
+  logOut() {
+    localStorage.removeItem('user_token');
+    localStorage.removeItem('user_id');
+    this.listasService.emptyNewList();
+    this.listasService.showStarIcon(false)
+    this.navbarService.showLogin(true);
+    this.router.navigate(['/inicio']);
+  }
+
+
 }

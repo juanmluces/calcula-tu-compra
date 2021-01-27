@@ -15,6 +15,7 @@
       <li routerLink="/config-lista" routerLinkActive="active" (click)="closeNavbarMobile()" class="list-logo">
         <fa-icon [icon]="faListAlt"></fa-icon>
         <fa-icon [@inAnimation] *ngIf="showPlusIcon" class="plus-icon text-primary bg-light" [icon]="faPlusCircle"></fa-icon>
+        <fa-icon [@inAnimation] *ngIf="showStarIcon" class="plus-icon star-icon text-warning" [icon]="faStar"></fa-icon>
       </li>
     </ul>
     <div class="nav-hamburguer-container">

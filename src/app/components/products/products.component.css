@@ -93,7 +93,7 @@ h2.titulo:hover {
 }
 
 .search-box-input {
-  border-radius: 500px;
+  border-radius: 7px;
   padding: 0.25em 1em;
   /* padding-left: 1em; */
   border: none;

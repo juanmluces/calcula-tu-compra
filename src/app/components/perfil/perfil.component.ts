@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
-import { faSearch, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faSignOutAlt, faStar } from '@fortawesome/free-solid-svg-icons';
 import {
   NgbDateAdapter,
   NgbDateParserFormatter,
@@ -14,7 +14,7 @@ import {
   CustomDateParserFormatter,
 } from 'src/app/services/datepicker-adapter';
 import { NavbarService } from 'src/app/services/navbar.service';
-import { faEdit } from '@fortawesome/free-regular-svg-icons';
+import { faEdit, faStar as faStarOutline } from '@fortawesome/free-regular-svg-icons';
 import { Subject } from 'rxjs';
 import { Lista } from 'src/app/interfaces/lista';
 import { ngIfAnimate, ngIfAnimate2 } from 'src/app/animations/animations';
@@ -23,7 +23,8 @@ import {
   PerfectScrollbarConfigInterface,
   PERFECT_SCROLLBAR_CONFIG,
 } from 'ngx-perfect-scrollbar';
-import { Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
+import { PerfilService } from 'src/app/services/perfil.service';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -47,12 +48,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 export class PerfilComponent implements OnInit {
   faSearch = faSearch;
   faEdit = faEdit;
+  faStar = faStar;
+  faStarOutline = faStarOutline;
   faSingOut = faSignOutAlt;
   closeResult = '';
   private _success = new Subject<string>();
+  private _error = new Subject<string>();
   staticAlertClosed = false;
   successMessage = '';
+  errorsMessage = '';
   @ViewChild('selfClosingAlert', { static: false }) selfClosingAlert: NgbAlert;
+  @ViewChild('selfClosingAlert2', { static: false }) selfClosingAlert2: NgbAlert;
   config: PerfectScrollbarConfigInterface = {};
 
   searchText: string;
@@ -63,12 +69,17 @@ export class PerfilComponent implements OnInit {
   listaCargada: Lista;
   totalListaCargada: number;
   data: any;
+  username: string;
+  imgUrl: string;
+  showStarFav: boolean;
+  listaFavId: number;
 
   constructor(
     private navbarService: NavbarService,
     private modalService: NgbModal,
     private listasService: ListasService,
-    private router: Router
+    private userService: UsersService,
+    private perfilService: PerfilService
   ) {
     this.data = {
       labels: [
@@ -95,108 +106,19 @@ export class PerfilComponent implements OnInit {
       ],
     };
 
+    this.showStarFav = false;
+    this.username = '';
+    this.imgUrl = "../../../assets/svg/user-gray.svg"
     this.navbarService.showNavbar(true);
     this.placeholderDate = new Date();
     this.listaCargada = {
-      id: 1,
-      titulo: 'Mi Lista',
-      fecha: '2020-10-25 15:53:11',
-      fk_usuario: 1,
-      productos: [
-        {
-          id: 1,
-          marca: 'Hacendado',
-          nombre: 'Bacon taquitos',
-          imagen:
-            'https://a2.soysuper.com/2ead27424e55902df72c266ab9b47629.340.340.0.min.wmark.796266d1.jpg',
-          precio: 1.95,
-          descripcion: 'Pack 2 x 125 g - 250 g',
-          fk_categoria: 5,
-          cantidad: 1,
-        },
-        {
-          id: 2,
-          marca: 'Hacendado',
-          nombre: 'Fuet espetec extra',
-          imagen:
-            'https://a1.soysuper.com/1fb3977901e45a47c482ec3fbe69a541.340.340.0.min.wmark.06f2f5fb.jpg',
-          precio: 2.05,
-          descripcion: 'Pieza 240 g',
-          fk_categoria: 5,
-          cantidad: 1,
-        },
-        {
-          id: 3,
-          marca: 'Hacendado',
-          nombre: 'Queso rallado hilos pizza (mozzarella)',
-          imagen:
-            'https://a1.soysuper.com/dd7d2add51ede354c96c245e15a446cc.340.340.0.min.wmark.cbec57f5.jpg',
-          precio: 1.2,
-          descripcion: 'Paquete 200 g',
-          fk_categoria: 5,
-          cantidad: 1,
-        },
-        {
-          id: 4,
-          marca: 'Hacendado',
-          nombre:
-            'Queso rallado hilos 4 variedades (emental-cheddar-gouda-curado) fundir y gratinar',
-          imagen:
-            'https://a1.soysuper.com/1187328ec5916cda6c96e6faedbb3379.340.340.0.min.wmark.0b7441ac.jpg',
-          precio: 1.59,
-          descripcion: 'Paquete 180 g',
-          fk_categoria: 5,
-          cantidad: 1,
-        },
-        {
-          id: 5,
-          marca: 'Hacendado',
-          nombre: 'Jamon cocido extra lonchas finas',
-          imagen:
-            'https://a2.soysuper.com/038ae6dfadb153139dd66b8708c378da.340.340.0.min.wmark.e3d156d1.jpg',
-          precio: 2.99,
-          descripcion: 'Pack 2 x 225 g - 450 g',
-          fk_categoria: 5,
-          cantidad: 1,
-        },
-        {
-          id: 6,
-          marca: 'Hacendado',
-          nombre: 'Salchicha frankfurt 7 U',
-          imagen:
-            'https://a1.soysuper.com/12bea20d1ec4853f9dc8a2520d3b5ff1.340.340.0.min.wmark.e6f4e4a4.jpg',
-          precio: 1.45,
-          descripcion: 'Paquete pack 4 x 176 g - 704 g',
-          fk_categoria: 5,
-          cantidad: 1,
-        },
-        {
-          id: 7,
-          marca: 'Hacendado',
-          nombre: 'Queso barra havarti en lonchas',
-          imagen:
-            'https://a1.soysuper.com/6a6ec66010bffc367ff210fe96118fc4.340.340.0.min.wmark.4d45f188.jpg',
-          precio: 2.5,
-          descripcion: 'Paquete 300 g',
-          fk_categoria: 5,
-          cantidad: 1,
-        },
-        {
-          id: 8,
-          marca: 'Hacendado',
-          nombre: 'Fiambre pechuga pavo lonchas finas',
-          imagen:
-            'https://a2.soysuper.com/22e978f4243d214753fa3ba11b830c03.340.340.0.min.wmark.967fe2fa.jpg',
-          precio: 2.89,
-          descripcion: 'Paquete pack 2 x 200 g - 400 g',
-          fk_categoria: 5,
-          cantidad: 1,
-        },
-      ],
+      id: null,
+      titulo: 'No hay lista',
+      fecha: '',
+      fk_usuario: null,
+      productos: [],
     };
-    this.totalListaCargada = this.listasService.calculateTotal(
-      this.listaCargada.productos
-    );
+    this.totalListaCargada = 0;
 
     this.searchForm = new FormGroup(
       {
@@ -226,49 +148,88 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this._success.subscribe((message) => (this.successMessage = message));
     this._success.pipe(debounceTime(3000)).subscribe(() => {
       if (this.selfClosingAlert) {
         this.selfClosingAlert.close();
       }
     });
+    this._error.subscribe((message) => (this.errorsMessage = message));
+    this._error.pipe(debounceTime(3000)).subscribe(() => {
+      if (this.selfClosingAlert2) {
+        this.selfClosingAlert2.close();
+      }
+    });
+
+    this.checkFavorite()
+
+    const userInfo = await this.perfilService.getUserInfo();
+    // console.log(userInfo)
+    if (userInfo) {
+      this.username = userInfo.user;
+      if (this.loadImage(userInfo.avatar)) {
+        this.imgUrl = userInfo.avatar
+      }
+    }
+    if (!this.imgUrl) this.imgUrl = "../../../assets/svg/user-gray.svg"
+
   }
 
-  public changeSuccessMessage() {
-    this._success.next('Avatar acutalizado correctamente!');
+  async checkFavorite() {
+    const favList = await this.listasService.getFavoriteList();
+    if (favList) {
+      this.listaFavId = favList.id;
+      this.showStarFav = true;
+      this.listaCargada = favList
+    } else {
+      this.listaCargada = {
+        id: null,
+        titulo: 'No hay lista',
+        fecha: '',
+        fk_usuario: null,
+        productos: [],
+      };
+    }
   }
 
-  search() {
-    console.log(this.searchText);
-    this.listasBuscadas = [
-      {
-        id: 1,
-        titulo: 'Mi Lista',
-        fecha: '2020-10-25 15:53:11',
-        fk_usuario: 1,
-      },
-      {
-        id: 2,
-        titulo: 'Mi Lista',
-        fecha: '2020-10-25 15:53:11',
-        fk_usuario: 1,
-      },
-      {
-        id: 2,
-        titulo: 'Mi Lista',
-        fecha: '2020-10-25 15:53:11',
-        fk_usuario: 1,
-      },
-      {
-        id: 3,
-        titulo: 'Mi Lista',
-        fecha: '2020-10-25 15:53:11',
-        fk_usuario: 1,
-      },
-    ];
-    if (!this.searchText) this.listasBuscadas = null;
+  public changeSuccessMessage(pMessage) {
+    this._success.next(pMessage);
   }
+  public errorMessage(pMessage) {
+    this._error.next(pMessage);
+  }
+
+  async search() {
+    if (!this.searchText) {
+      this.listasBuscadas = null;
+      this.checkFavorite()
+    } else {
+      const result = await this.perfilService.searchByInput(this.searchText)
+      console.log(result)
+      this.listasBuscadas = result;
+    }
+
+  }
+
+  async toggleFavorite() {
+    if (!this.listaCargada.id) return
+    console.log(this.listaCargada.id)
+    if (this.showStarFav) {
+      this.listaFavId = null;
+      this.showStarFav = false;
+      this.errorMessage('La lista ya no es la favorita')
+      await this.perfilService.removeFavoriteList();
+    } else {
+      this.showStarFav = true;
+      this.listaFavId = this.listaCargada.id
+
+      this.changeSuccessMessage('Lista marcada como favorita');
+      await this.perfilService.createFavoriteList(this.listaCargada.id);
+    }
+
+  }
+
 
   onSubmitSearch() {
     let fechaDesdeValue = this.searchForm.value.fechaDesde;
@@ -299,16 +260,35 @@ export class PerfilComponent implements OnInit {
     console.log({ fechaDesdeValue, fechaHastaValue });
   }
 
-  onModalSubmit() {
-    console.log(this.modalForm.value);
+  async onModalSubmit() {
+    const avatarUrl = this.modalForm.value.avatarUrl;
+    if (this.loadImage(avatarUrl)) {
+      const result = await this.perfilService.changeUserAvatar(this.modalForm.value.avatarUrl)
+      const userInfo = await this.perfilService.getUserInfo();
+      this.imgUrl = userInfo.avatar
+      this.changeSuccessMessage('Avatar acutalizado correctamente!');
+    } else {
+      this.errorMessage('Ha habido un problema con la url, no se ha actualizado')
+    }
     this.modalForm.reset();
-    this.changeSuccessMessage();
   }
   borrarFechas() {
     this.searchForm.reset();
     this.searchText = '';
     this.listasBuscadas = null;
   }
+
+  loadImage = (url) => {
+    let image = new Image();
+    var url_image = url;
+    image.src = url_image;
+    if (image.width == 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
 
   open(content) {
     this.modalForm.reset();
@@ -334,8 +314,19 @@ export class PerfilComponent implements OnInit {
     }
   }
 
-  cargarLista(listId: number) {
-    console.log(listId);
+  async cargarLista(list: Lista) {
+    const listInfo = list;
+    const productos = await this.perfilService.getSearchedList(listInfo.id);
+    if (this.listaFavId === listInfo.id) {
+      this.showStarFav = true;
+      console.log(true, this.listaFavId, listInfo.id)
+    } else {
+      this.showStarFav = false;
+      console.log(false, this.listaFavId, listInfo.id)
+
+    }
+    this.listaCargada = listInfo;
+    this.listaCargada.productos = productos;
   }
 
   parseToDateFormat(date: string): Date {
@@ -368,10 +359,7 @@ export class PerfilComponent implements OnInit {
   }
 
   logOut() {
-    localStorage.removeItem('user_token');
-    localStorage.removeItem('user_id');
-    this.navbarService.showLogin(true);
-    this.router.navigate(['/inicio']);
+    this.userService.logOut()
   }
 
 

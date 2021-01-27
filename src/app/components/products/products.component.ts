@@ -147,6 +147,7 @@ export class ProductsComponent implements OnInit {
 
 
   addProduct(pProduct) {
+    this.listasService.showStarIcon(false)
     this.listasService.addProductToList(pProduct);
     this.productsInList.forEach(product => {
       this.productsToShow.products.find(producto => {

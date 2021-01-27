@@ -1,7 +1,7 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { faListAlt } from "@fortawesome/free-regular-svg-icons";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle, faStar } from "@fortawesome/free-solid-svg-icons";
 import { Observable } from "rxjs"
 import { NavbarService } from './services/navbar.service';
 import { componentAnimate, ngIfAnimate, navbarAnimation } from './animations/animations'
@@ -24,12 +24,15 @@ export class AppComponent {
   title = 'calcula-tu-compra';
   faListAlt = faListAlt;
   faPlusCircle = faPlusCircle;
+  faStar = faStar;
   showPlusIcon: boolean;
+  showStarIcon: boolean;
   showNav: boolean;
   showMobileNav: boolean;
   mobileNavOpened: boolean;
   navbar$: Observable<boolean>;
   plusIcon$: Observable<boolean>;
+  starIcon$: Observable<boolean>;
   logged$: Observable<boolean>;
   @ViewChild('navBurguer') navBurguer: ElementRef;
   @ViewChild('wrapper') wrapper: ElementRef;
@@ -52,13 +55,16 @@ export class AppComponent {
     this.plusIcon$ = this.listasService.getPlusIconStatus$();
     this.plusIcon$.subscribe(plusIcon => this.showPlusIcon = plusIcon);
 
+    this.starIcon$ = this.listasService.getFavoriteStatus$();
+    this.starIcon$.subscribe(starIcon => this.showStarIcon = starIcon);
+
     this.showMobileNav = true;
     this.mobileNavOpened = false;
     this.logoUrl = "../assets/svg/LOGO.svg";
     this.showPlusIcon = false;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.checkWidthShowNavbar();
     window.onresize = () => { this.checkWidthShowNavbar() }
     if (localStorage.getItem('user_token')) {
@@ -66,6 +72,29 @@ export class AppComponent {
     } else {
       this.navbarService.showLogin(true);
     }
+
+    // if (this.logged) {
+    //   try {
+    //     const favList = await this.listasService.getFavoriteList();
+    //     if (favList) {
+    //       this.listasService.showStarIcon(true);
+    //       favList.productos.forEach(producto => {
+    //         if (producto.cantidad > 1) {
+    //           for (let cantidad = 1; cantidad <= producto.cantidad; cantidad++) {
+    //             this.listasService.addProductToList(producto)
+    //           }
+    //         } else {
+    //           this.listasService.addProductToList(producto)
+    //         }
+    //       });
+    //       this.listasService.showPlusIcon(false)
+    //     } else {
+    //       this.listasService.showStarIcon(false)
+    //     }
+    //   } catch (error) {
+    //     console.log(error)
+    //   }
+    // }
   }
 
   ngAfterViewInit() {

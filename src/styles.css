@@ -152,6 +152,16 @@ button.btn.btn-info {
   transition: all ease-in-out 50ms;
 }
 
+button.btn.my-danger{
+  width: 120px !important;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all ease-in-out 50ms;
+
+}
+
 button.btn.btn-info:hover,
 button.btn.btn-info:focus,
 button.btn.btn-info:active {

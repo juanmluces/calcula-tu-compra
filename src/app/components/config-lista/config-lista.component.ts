@@ -97,6 +97,21 @@ export class ConfigListaComponent implements OnInit {
     }
   }
 
+  cargarListaFav() {
+
+    this.listasService.loadFavoriteList();
+    this.productsInList = this.listasService.getNewList();
+    this.total = this.listasService.calculateTotal(this.productsInList)
+
+  }
+
+  borrarLista() {
+    this.listasService.emptyNewList()
+    this.productsInList = []
+    this.total = 0;
+    this.nombreLista = ''
+  }
+
   async onGuardarLista() {
     if (!this.userId) {
       this._error.next('debes iniciar sesión para guardar listas');

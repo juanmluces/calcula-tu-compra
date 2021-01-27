@@ -1,7 +1,8 @@
 <div class="dark-layer">
   <div class="wrapper">
 
-
+    <ngb-alert [@bsInAnimation] class="success-alert" #selfClosingAlert *ngIf="errorMessage" type="danger" (closed)="errorMessage = ''">{{ errorMessage }}
+    </ngb-alert>
     <div class="container-list">
       <h3>{{nombreLista}}</h3>
       <hr>
