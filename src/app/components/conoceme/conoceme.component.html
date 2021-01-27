@@ -6,17 +6,52 @@
   <div class="contenedor-conoceme">
 
     <div class="contenedor-perfil-desktop">
-    <div class="conoceme-perfil">
-      <div class="imagen-contenedor">
+      <div class="conoceme-perfil">
+        <div class="imagen-contenedor">
           <img src="../../../assets/images/cv sueter.jpg" alt="">
-      </div>
-      <div class="nombre-email-container">
-        <h4>Juan Miguel Luces</h4>
-        <hr>
-        <h5>juanmluces@yahoo.es</h5>
-      </div>
+        </div>
+        <div class="nombre-email-container">
+          <h4>Juan Miguel Luces</h4>
+          <hr>
+          <h5>juanmluces@yahoo.es</h5>
+        </div>
 
-      <div class="bio-container mobile">
+        <div class="bio-container mobile">
+          <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="button">
+            <label ngbButtonLabel class="btn-secondary mi-boton">
+              <input ngbButton type="radio" (change)="selectText()" [value]="1"> ¿Juan Miguel Luces?
+            </label>
+            <label ngbButtonLabel class="btn-secondary  mi-boton">
+              <input ngbButton type="radio" (change)="selectText()" [value]="0"> ¿Calculatucompra?
+            </label>
+          </div>
+          <h5>{{showContent.title}}</h5>
+          <p [innerHTML]="parragraf" *ngFor="let parragraf of showContent.content"></p>
+        </div>
+        <div class="social-container">
+          <div class="social-element">
+            <a class="linkdin" target="_blank" href="https://www.linkedin.com/in/juanmiguelluces/">
+              <fa-icon [icon]="faLinkedin"></fa-icon> <span>Linkdin</span>
+            </a>
+          </div>
+          <div class="social-element">
+            <a class="github" target="_blank" href="https://github.com/juanmluces">
+              <fa-icon [icon]="faGithub"></fa-icon> <span>Github</span>
+            </a>
+          </div>
+          <div class="social-element">
+            <a class="portfolio" target="_blank" href=""> <span class="logo-span"><img class="underImg" src="../../../assets/svg/solo-logo-color.svg" alt="logo"><img class="overImg" src="../../../assets/svg/LOGO neutro.svg" alt="logo"></span> <span>Portfolio</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="contenedor-bio-desktop desktop">
+      <div class="bio-container">
+        <h3>{{showContent.title}}</h3>
+        <p [innerHTML]="parragraf" *ngFor="let parragraf of showContent.content"></p>
         <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="button">
           <label ngbButtonLabel class="btn-secondary mi-boton">
             <input ngbButton type="radio" (change)="selectText()" [value]="1"> ¿Juan Miguel Luces?
@@ -25,39 +60,8 @@
             <input ngbButton type="radio" (change)="selectText()" [value]="0"> ¿Calculatucompra?
           </label>
         </div>
-      <h5>{{showContent.title}}</h5>
-      <p *ngFor="let parragraf of showContent.content">{{parragraf}}</p>
       </div>
-      <div class="social-container">
-        <div class="social-element">
-          <a class="linkdin" target="_blank" href="https://www.linkedin.com/in/juanmiguelluces/"><fa-icon  [icon]="faLinkedin"></fa-icon> <span>Linkdin</span></a>
-        </div>
-        <div class="social-element">
-          <a  class="github" target="_blank" href="https://github.com/juanmluces"> <fa-icon  [icon]="faGithub"></fa-icon> <span>Github</span></a>
-        </div>
-        <div class="social-element">
-          <a class="portfolio" target="_blank" href=""> <span class="logo-span"><img class="underImg" src="../../../assets/svg/solo-logo-color.svg" alt="logo"><img class="overImg" src="../../../assets/svg/LOGO neutro.svg" alt="logo"></span> <span>Portfolio</span></a>
-        </div>
-      </div>
-    </div>
-  </div>
 
-
-
-  <div class="contenedor-bio-desktop desktop">
-    <div  class="bio-container">
-      <h3>{{showContent.title}}</h3>
-     <p *ngFor="let parragraf of showContent.content">{{parragraf}}</p>
-     <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" [(ngModel)]="button">
-      <label ngbButtonLabel class="btn-secondary mi-boton">
-        <input ngbButton type="radio" (change)="selectText()" [value]="1"> ¿Juan Miguel Luces?
-      </label>
-      <label ngbButtonLabel class="btn-secondary  mi-boton">
-        <input ngbButton type="radio" (change)="selectText()" [value]="0"> ¿Calculatucompra?
-      </label>
     </div>
-    </div>
-    
-  </div>
   </div>
 </div>

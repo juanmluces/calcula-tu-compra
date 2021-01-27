@@ -73,6 +73,7 @@ export class PerfilComponent implements OnInit {
   imgUrl: string;
   showStarFav: boolean;
   listaFavId: number;
+  statsData: number[];
 
   constructor(
     private navbarService: NavbarService,
@@ -81,30 +82,7 @@ export class PerfilComponent implements OnInit {
     private userService: UsersService,
     private perfilService: PerfilService
   ) {
-    this.data = {
-      labels: [
-        'Enero',
-        'Febrero',
-        'Marzo',
-        'Abril',
-        'Mayo',
-        'Junio',
-        'Julio',
-        'Agosto',
-        'Septiembre',
-        'Octubre',
-        'Noviembre',
-        'Diciembre',
-      ],
-      datasets: [
-        {
-          label: 'Gastos Mensuales "€"',
-          backgroundColor: '#2A4420',
-          borderColor: '#192913',
-          data: [65, 59, 80, 81, 56, 55, 35, 56, 55, 90, 70, 120],
-        },
-      ],
-    };
+
 
     this.showStarFav = false;
     this.username = '';
@@ -162,15 +140,40 @@ export class PerfilComponent implements OnInit {
       }
     });
 
+    this.statsData = await this.perfilService.getExpensesStats();
+
+    this.data = {
+      labels: [
+        'Enero',
+        'Febrero',
+        'Marzo',
+        'Abril',
+        'Mayo',
+        'Junio',
+        'Julio',
+        'Agosto',
+        'Septiembre',
+        'Octubre',
+        'Noviembre',
+        'Diciembre',
+      ],
+      datasets: [
+        {
+          label: 'Gastos Mensuales en €',
+          backgroundColor: '#2A4420',
+          borderColor: '#192913',
+          data: this.statsData,
+        },
+      ],
+    };
+
     this.checkFavorite()
 
     const userInfo = await this.perfilService.getUserInfo();
-    // console.log(userInfo)
+    console.log(userInfo)
     if (userInfo) {
       this.username = userInfo.user;
-      if (this.loadImage(userInfo.avatar)) {
-        this.imgUrl = userInfo.avatar
-      }
+      this.imgUrl = userInfo.avatar;
     }
     if (!this.imgUrl) this.imgUrl = "../../../assets/svg/user-gray.svg"
 

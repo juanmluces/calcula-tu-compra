@@ -115,6 +115,21 @@ export class PerfilService {
 
   }
 
+
+  getExpensesStats(): Promise<number[]> {
+    const body = {
+      userid: localStorage.getItem('user_id'),
+    }
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('user_token')
+      })
+
+    }
+    return this.httpClient.post<number[]>(this.baseUrl + 'stats', body, httpOptions).toPromise()
+  }
+
 }
 
 

@@ -5,7 +5,7 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { bootstrapAnimateAlert, ngIfAnimate } from 'src/app/animations/animations';
-import { ListasService } from 'src/app/services/listas.service';
+// import { ListasService } from 'src/app/services/listas.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -92,9 +92,9 @@ export class InicioComponent implements OnInit {
     const newUser = this.signUpForm.value;
     const result = await this.usersService.createUser(newUser);
     if (result.error) {
-      alert(result.error);
+      this._error.next(result.error);
     } else {
-      alert(result.message);
+      this._success.next(result.message);
       const logResult = await this.usersService.loginUser(newUser);
       localStorage.setItem('user_token', JSON.stringify(logResult.token));
       this.navbarService.showLogin(false);

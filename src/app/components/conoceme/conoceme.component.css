@@ -55,12 +55,14 @@ div.bio-container h5 {
 }
 
 div.bio-container p {
-  line-height: 1.2;
+  line-height: 1.4;
 }
 
 div.bio-container p:first-of-type {
   text-indent: 1em;
 }
+
+
 
 div.social-container {
   display: flex;
@@ -188,6 +190,7 @@ div.btn-group label {
     -webkit-box-shadow: 3px 7px 10px -3px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 3px 7px 10px -3px rgba(0, 0, 0, 0.75);
     box-shadow: 3px 7px 10px -3px rgba(0, 0, 0, 0.75);
+    padding-bottom: 3.8em;
   }
 
   .contenedor-conoceme {
@@ -232,8 +235,12 @@ div.btn-group label {
   }
 
   .bio-container p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--primary-color-dark);
+  }
+
+  .bio-container p:last-of-type {
+padding-bottom: 1em;
   }
   div.btn-group {
     flex-direction: row;

@@ -130,6 +130,20 @@ div.dark-layer {
   min-height: calc(100vh - 4rem);
 }
 
+.bio-ol{
+  list-style-type: decimal;
+  margin: 1em;
+  margin-left: 2em;
+}
+
+.bio-ol li {
+  padding-bottom: 1em;
+}
+
+.bio-ol li:last-of-type{
+  padding-bottom: 0;
+}
+
 /* Button styles */
 
 button.btn.mi-boton,
