@@ -1,6 +1,6 @@
-https://calcula-tu-compra123456.web.app
-usuario de prueba: juan
-password: 12345
+# https://calcula-tu-compra123456.web.app
+- usuario de prueba: juan
+- password: 12345
 
 # CalculaTuCompra - Front End
 
