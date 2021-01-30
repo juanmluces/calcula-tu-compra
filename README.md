@@ -1,4 +1,10 @@
+https://calcula-tu-compra123456.web.app
+usuario de prueba: juan
+password: 12345
+
 # CalculaTuCompra - Front End
+
+
 
 ## ¿Qué és?
 - Es una aplicación <strong>Full Stack</strong>, en otras palabras, que se compone de código del lado del cliente (todo lo que ves) y código del lado del servidor (rutas, bases de datos y demás).
