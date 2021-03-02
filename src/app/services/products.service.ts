@@ -12,7 +12,7 @@ export class ProductsService {
   private categorySelected: number;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = 'http://localhost:3000/products/';
+    this.baseUrl = 'https://calculatucompra.herokuapp.com/products/';
   }
 
   getAllProductsByPage(pPage: number): Promise<ProductsObject> {

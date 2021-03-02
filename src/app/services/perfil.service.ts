@@ -11,7 +11,7 @@ export class PerfilService {
   private baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = 'http://localhost:3000/profile/';
+    this.baseUrl = 'https://calculatucompra.herokuapp.com/profile/';
   }
 
   getUserInfo(): Promise<any> {

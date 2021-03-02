@@ -349,7 +349,25 @@ div.contenedor-perfil-desktop {
   min-height: 200px;
 }
 
+div.mobile-div{
+  display: block;
+}
+
+.desktop-div{
+  display: none;
+}
+
 @media (min-width: 800px) {
+
+  div.mobile-div{
+    display: none;
+  }
+
+  .desktop-div{
+    display: block;
+  }
+
+
   .contenedor-chart {
     display: block;
     background-color: var(--primary-color);

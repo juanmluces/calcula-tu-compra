@@ -18,7 +18,7 @@ export class UsersService {
     private navbarService: NavbarService,
     private router: Router,
     private listasService: ListasService) {
-    this.baseUrl = 'http://localhost:3000/users/';
+    this.baseUrl = 'https://calculatucompra.herokuapp.com/users/';
 
   }
 

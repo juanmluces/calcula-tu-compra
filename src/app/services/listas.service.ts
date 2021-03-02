@@ -16,7 +16,7 @@ export class ListasService {
 
   constructor(private httpClient: HttpClient) {
     this.newList = [];
-    this.baseUrl = 'http://localhost:3000/lists/';
+    this.baseUrl = 'https://calculatucompra.herokuapp.com/lists/';
   }
 
   showPlusIcon(pShowIcon: boolean) {

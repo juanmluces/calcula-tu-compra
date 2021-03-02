@@ -79,7 +79,7 @@
               <li class="no-list"> - No hay listas -</li>
             </ul>
 
-            <perfect-scrollbar [@inAnimation2] *ngIf="listasBuscadas" [config]="config">
+            <perfect-scrollbar class="desktop-div" [@inAnimation2] *ngIf="listasBuscadas" [config]="config">
               <ul>
                 <li (click)="cargarLista(lista)" [attr.data-id]="lista.id" *ngFor="let lista of listasBuscadas; let index = index">
                   <fa-icon [@inAnimation] *ngIf="lista.id === listaFavId" class="plus-icon star-icon text-warning star-list" [icon]="faStar"></fa-icon>
@@ -87,6 +87,15 @@
                 </li>
               </ul>
             </perfect-scrollbar>
+
+            <div class="mobile-div" [@inAnimation2] *ngIf="listasBuscadas">
+              <ul>
+                <li (click)="cargarLista(lista)" [attr.data-id]="lista.id" *ngFor="let lista of listasBuscadas; let index = index">
+                  <fa-icon [@inAnimation] *ngIf="lista.id === listaFavId" class="plus-icon star-icon text-warning star-list" [icon]="faStar"></fa-icon>
+                  <span class="titulo-lista"> -{{lista.titulo}} </span> &nbsp; <span>{{lista.fecha | date:'dd/MM/yyyy '}}</span>
+                </li>
+              </ul>
+            </div>
           </div>
 
         </div>
