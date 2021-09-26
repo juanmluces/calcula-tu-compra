@@ -54,6 +54,7 @@ export class MiListaComponent implements OnInit {
         this.total = this.listasService.calculateTotal(this.productsInList)
       }
     } catch (error) {
+      this.loaderService.loadingFalse()
       console.log(error)
       if (error.error.error === 'The token is expired') {
         this._error.next('Ha caducado tu sesión.')

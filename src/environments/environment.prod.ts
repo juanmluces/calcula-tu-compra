@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "https://calculatucompra.herokuapp.com/"
+  apiUrl: "https://new-calcula-tu-compra.herokuapp.com/"
 };
