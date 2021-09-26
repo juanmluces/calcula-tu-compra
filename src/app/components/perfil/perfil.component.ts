@@ -25,6 +25,7 @@ import {
 } from 'ngx-perfect-scrollbar';
 import { UsersService } from 'src/app/services/users.service';
 import { PerfilService } from 'src/app/services/perfil.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -80,7 +81,8 @@ export class PerfilComponent implements OnInit {
     private modalService: NgbModal,
     private listasService: ListasService,
     private userService: UsersService,
-    private perfilService: PerfilService
+    private perfilService: PerfilService,
+    private loaderService: LoaderService
   ) {
 
 
@@ -139,8 +141,9 @@ export class PerfilComponent implements OnInit {
         this.selfClosingAlert2.close();
       }
     });
-
+    this.loaderService.loadingTrue()
     this.statsData = await this.perfilService.getExpensesStats();
+    this.loaderService.loadingFalse()
 
     this.data = {
       labels: [
@@ -168,8 +171,9 @@ export class PerfilComponent implements OnInit {
     };
 
     this.checkFavorite()
-
+    this.loaderService.loadingTrue()
     const userInfo = await this.perfilService.getUserInfo();
+    this.loaderService.loadingFalse()
     console.log(userInfo)
     if (userInfo) {
       this.username = userInfo.user;
@@ -180,7 +184,9 @@ export class PerfilComponent implements OnInit {
   }
 
   async checkFavorite() {
+    this.loaderService.loadingTrue()
     const favList = await this.listasService.getFavoriteList();
+    this.loaderService.loadingFalse()
     if (favList) {
       this.listaFavId = favList.id;
       this.showStarFav = true;
@@ -208,7 +214,9 @@ export class PerfilComponent implements OnInit {
       this.listasBuscadas = null;
       this.checkFavorite()
     } else {
+    
       const result = await this.perfilService.searchByInput(this.searchText)
+   
       console.log(result)
       this.listasBuscadas = result;
     }
@@ -222,13 +230,17 @@ export class PerfilComponent implements OnInit {
       this.listaFavId = null;
       this.showStarFav = false;
       this.errorMessage('La lista ya no es la favorita')
+      this.loaderService.loadingTrue()
       await this.perfilService.removeFavoriteList();
+      this.loaderService.loadingFalse()
     } else {
       this.showStarFav = true;
       this.listaFavId = this.listaCargada.id
 
       this.changeSuccessMessage('Lista marcada como favorita');
+      this.loaderService.loadingTrue()
       await this.perfilService.createFavoriteList(this.listaCargada.id);
+      this.loaderService.loadingFalse()
     }
 
   }
@@ -242,9 +254,12 @@ export class PerfilComponent implements OnInit {
     console.log({ fechaDesdeValue, fechaHastaValue });
 
     try {
+      this.loaderService.loadingTrue()
       this.listasBuscadas = await this.perfilService.getListDateRange(fechaDesdeValue, fechaHastaValue);
+      this.loaderService.loadingFalse()
 
     } catch (error) {
+      this.loaderService.loadingFalse()
       console.warn(error);
     }
   }
@@ -252,8 +267,10 @@ export class PerfilComponent implements OnInit {
   async onModalSubmit() {
     const avatarUrl = this.modalForm.value.avatarUrl;
     if (this.loadImage(avatarUrl)) {
+      this.loaderService.loadingTrue()
       const result = await this.perfilService.changeUserAvatar(this.modalForm.value.avatarUrl)
       const userInfo = await this.perfilService.getUserInfo();
+      this.loaderService.loadingFalse()
       this.imgUrl = userInfo.avatar
       this.changeSuccessMessage('Avatar acutalizado correctamente!');
     } else {
@@ -305,7 +322,9 @@ export class PerfilComponent implements OnInit {
 
   async cargarLista(list: Lista) {
     const listInfo = list;
+    this.loaderService.loadingTrue()
     const productos = await this.perfilService.getSearchedList(listInfo.id);
+    this.loaderService.loadingFalse()
     if (this.listaFavId === listInfo.id) {
       this.showStarFav = true;
       console.log(true, this.listaFavId, listInfo.id)

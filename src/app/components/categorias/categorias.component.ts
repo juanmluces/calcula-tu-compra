@@ -4,6 +4,7 @@ import { NavbarService } from 'src/app/services/navbar.service';
 
 import { PerfectScrollbarConfigInterface, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { ProductsService } from 'src/app/services/products.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
@@ -31,7 +32,8 @@ export class CategoriasComponent implements OnInit {
 
   constructor(
     private navbarService: NavbarService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private loadigService: LoaderService
   ) {
 
     this.categoryImage = '../../../assets/images/todos.jpg';
@@ -43,7 +45,9 @@ export class CategoriasComponent implements OnInit {
 
   async ngOnInit() {
 
+    this.loadigService.loadingTrue()
     this.categories = await this.productsService.getAllCategories();
+    this.loadigService.loadingFalse()
 
   }
 

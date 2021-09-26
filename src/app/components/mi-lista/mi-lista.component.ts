@@ -7,6 +7,7 @@ import { debounceTime } from 'rxjs/operators';
 import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { bootstrapAnimateAlert } from '../../animations/animations'
 import { UsersService } from 'src/app/services/users.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-mi-lista',
@@ -28,7 +29,8 @@ export class MiListaComponent implements OnInit {
   constructor(
     private navbarServices: NavbarService,
     private listasService: ListasService,
-    private userService: UsersService
+    private userService: UsersService,
+    private loaderService: LoaderService
   ) {
     this.navbarServices.showNavbar(true)
     this.nombreLista = 'No hay lista guardada'
@@ -43,7 +45,9 @@ export class MiListaComponent implements OnInit {
     });
 
     try {
+      this.loaderService.loadingTrue()
       this.list = await this.listasService.getLastList();
+      this.loaderService.loadingFalse()
       if (this.list) {
         this.productsInList = this.list.productos
         this.nombreLista = this.list.titulo

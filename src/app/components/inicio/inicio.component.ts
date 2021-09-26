@@ -5,6 +5,7 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { bootstrapAnimateAlert, ngIfAnimate } from 'src/app/animations/animations';
+import { LoaderService } from 'src/app/services/loader.service';
 // import { ListasService } from 'src/app/services/listas.service';
 import { NavbarService } from 'src/app/services/navbar.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -33,6 +34,7 @@ export class InicioComponent implements OnInit {
     private navbarService: NavbarService,
     private usersService: UsersService,
     private router: Router,
+    private loaderService: LoaderService
   ) {
     this.homeBox = true;
     this.loginBox = false;
@@ -75,7 +77,9 @@ export class InicioComponent implements OnInit {
 
   async onLoginSubmit() {
     const loginUser = this.loginForm.value;
+    this.loaderService.loadingTrue()
     const result = await this.usersService.loginUser(loginUser);
+    this.loaderService.loadingFalse()
     if (result.error) {
       this._error.next(result.error);
     } else {
@@ -90,12 +94,16 @@ export class InicioComponent implements OnInit {
 
   async onSignUpSubmit() {
     const newUser = this.signUpForm.value;
+    this.loaderService.loadingTrue()
     const result = await this.usersService.createUser(newUser);
+    this.loaderService.loadingFalse()
     if (result.error) {
       this._error.next(result.error);
     } else {
       this._success.next(result.message);
+      this.loaderService.loadingTrue()
       const logResult = await this.usersService.loginUser(newUser);
+      this.loaderService.loadingFalse()
       localStorage.setItem('user_token', JSON.stringify(logResult.token));
       this.navbarService.showLogin(false);
       this.router.navigate(['/categorias']);

@@ -7,6 +7,7 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 import { Subject } from 'rxjs';
 import { bootstrapAnimateAlert } from '../../animations/animations'
 import { ListasService } from 'src/app/services/listas.service';
+import { LoaderService } from 'src/app/services/loader.service';
 
 @Component({
   selector: 'app-config-lista',
@@ -34,7 +35,8 @@ export class ConfigListaComponent implements OnInit {
 
   constructor(
     private navbarService: NavbarService,
-    private listasService: ListasService
+    private listasService: ListasService,
+    private loaderService: LoaderService
   ) {
     this.navbarService.showNavbar(true)
     this.productsInList = this.listasService.getNewList();
@@ -118,7 +120,9 @@ export class ConfigListaComponent implements OnInit {
     } else {
       try {
         if (!this.nombreLista) this.nombreLista = "Mi Lista"
+        this.loaderService.loadingTrue()
         const result = await this.listasService.saveNewList(this.userId, this.nombreLista);
+        this.loaderService.loadingFalse()
         // console.log(result)
         const productsIdList = [];
         for (let product of this.productsInList) {

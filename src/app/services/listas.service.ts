@@ -3,6 +3,7 @@ import { Product } from '../interfaces/product';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Lista } from '../interfaces/lista';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ListasService {
 
   constructor(private httpClient: HttpClient) {
     this.newList = [];
-    this.baseUrl = 'https://calculatucompra.herokuapp.com/lists/';
+    this.baseUrl = environment.apiUrl+'lists/';
   }
 
   showPlusIcon(pShowIcon: boolean) {

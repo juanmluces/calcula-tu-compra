@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Product } from '../interfaces/product';
 import { ProductsObject } from '../interfaces/ProductsObject';
 
@@ -12,7 +13,7 @@ export class ProductsService {
   private categorySelected: number;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = 'https://calculatucompra.herokuapp.com/products/';
+    this.baseUrl = environment.apiUrl+'products/';
   }
 
   getAllProductsByPage(pPage: number): Promise<ProductsObject> {

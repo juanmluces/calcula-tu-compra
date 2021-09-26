@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { ListasService } from './listas.service';
 import { NavbarService } from './navbar.service';
 
@@ -18,7 +19,7 @@ export class UsersService {
     private navbarService: NavbarService,
     private router: Router,
     private listasService: ListasService) {
-    this.baseUrl = 'https://calculatucompra.herokuapp.com/users/';
+    this.baseUrl = environment.apiUrl+'users/';
 
   }
 

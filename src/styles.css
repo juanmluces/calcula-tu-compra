@@ -387,3 +387,26 @@ ngb-alert.success-alert{
     border: solid 1px var(--primary-color);
 }
 
+
+.spinner-container{
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  top: 0;
+  background: rgba(0,0,0,0.5);
+
+}
+
+.spinner-border{
+color: var(--secondary-color);
+width: 6rem;
+height: 6rem;
+}
+
+body.loading{
+  overflow: hidden;
+}

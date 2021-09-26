@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { Lista } from '../interfaces/lista';
 import { Product } from '../interfaces/product';
 
@@ -11,7 +12,7 @@ export class PerfilService {
   private baseUrl: string;
 
   constructor(private httpClient: HttpClient) {
-    this.baseUrl = 'https://calculatucompra.herokuapp.com/profile/';
+    this.baseUrl = environment.apiUrl+'profile/';
   }
 
   getUserInfo(): Promise<any> {

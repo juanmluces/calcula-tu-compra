@@ -7,6 +7,7 @@ import { ListasService } from 'src/app/services/listas.service';
 import { ProductsService } from 'src/app/services/products.service';
 import { ProductsObject } from 'src/app/interfaces/ProductsObject';
 import { DOCUMENT } from '@angular/common';
+import { LoaderService } from 'src/app/services/loader.service';
 
 
 
@@ -37,6 +38,7 @@ export class ProductsComponent implements OnInit {
     private navbarService: NavbarService,
     private listasService: ListasService,
     private productsService: ProductsService,
+    private loaderService: LoaderService,
     @Inject(DOCUMENT) private document: Document
   ) {
 
@@ -59,12 +61,18 @@ export class ProductsComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.loaderService.loadingTrue()
     this.category = await this.productsService.getSelectedCategory();
+    this.loaderService.loadingFalse()
     if (!this.category) {
       this.category = { name: 'todos los productos' }
+      this.loaderService.loadingTrue()
       this.productsToShow = await this.productsService.getAllProductsByPage(this.page);
+      this.loaderService.loadingFalse()
     } else {
+      this.loaderService.loadingTrue()
       this.productsToShow = await this.productsService.getAllProductsByCategoryByPage(this.page);
+      this.loaderService.loadingFalse()
     }
 
     this.maxPages = (this.productsToShow.maxPages);
@@ -128,16 +136,22 @@ export class ProductsComponent implements OnInit {
     const newPage = $event;
     this.scrollToTop()
     if (this.searchText) {
+      this.loaderService.loadingTrue()
       this.productsToShow = await this.productsService.getProductsContainNameByPage(this.searchText, newPage);
+      this.loaderService.loadingFalse()
       this.selectedProductsBadges()
       this.checkEmptyImages()
     } else {
       if (!this.category.id) {
+        this.loaderService.loadingTrue()
         this.productsToShow = await this.productsService.getAllProductsByPage(newPage);
+        this.loaderService.loadingFalse()
         this.selectedProductsBadges()
         this.checkEmptyImages()
       } else {
+        this.loaderService.loadingTrue()
         this.productsToShow = await this.productsService.getAllProductsByCategoryByPage(newPage);
+        this.loaderService.loadingFalse()
         this.selectedProductsBadges()
         this.checkEmptyImages()
 

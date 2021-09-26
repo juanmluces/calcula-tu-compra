@@ -18,6 +18,7 @@ import { MiListaComponent } from './components/mi-lista/mi-lista.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { ChartModule } from 'primeng/chart';
 import { ConocemeComponent } from './components/conoceme/conoceme.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ConocemeComponent } from './components/conoceme/conoceme.component';
     PerfectScrollbarModule,
     NgbModule,
     ChartModule,
-    HttpClientModule
+    HttpClientModule,
+    ProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { faListAlt } from "@fortawesome/free-regular-svg-icons";
 import { faPlusCircle, faStar } from "@fortawesome/free-solid-svg-icons";
@@ -6,6 +6,7 @@ import { Observable } from "rxjs"
 import { NavbarService } from './services/navbar.service';
 import { componentAnimate, ngIfAnimate, navbarAnimation } from './animations/animations'
 import { ListasService } from './services/listas.service';
+import { LoaderService } from './services/loader.service';
 
 
 
@@ -20,7 +21,7 @@ import { ListasService } from './services/listas.service';
     navbarAnimation
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewChecked{
   title = 'calcula-tu-compra';
   faListAlt = faListAlt;
   faPlusCircle = faPlusCircle;
@@ -40,11 +41,15 @@ export class AppComponent {
   logoUrl: string;
   logged: boolean;
 
+  isLoading: boolean;
+
 
   constructor(
     private navbarService: NavbarService,
     private rd: Renderer2,
-    private listasService: ListasService
+    private listasService: ListasService,
+    private loadingService: LoaderService,
+    private cd: ChangeDetectorRef
   ) {
     this.logged$ = this.navbarService.getLoginStatus$();
     this.logged$.subscribe(logged => this.logged = logged);
@@ -65,6 +70,12 @@ export class AppComponent {
   }
 
   async ngOnInit() {
+
+    this.loadingService.loader$().subscribe(isLoading => {
+      this.isLoading = isLoading 
+      this.isLoading ? document.querySelector('body').classList.add('loading') : document.querySelector('body').classList.remove('loading')
+    })
+
     this.checkWidthShowNavbar();
     window.onresize = () => { this.checkWidthShowNavbar() }
     if (localStorage.getItem('user_token')) {
@@ -97,9 +108,9 @@ export class AppComponent {
     // }
   }
 
-  ngAfterViewInit() {
+  ngAfterViewChecked() {
 
-
+    this.cd.detectChanges();
   }
 
   prepareRoute(outlet: RouterOutlet) {
