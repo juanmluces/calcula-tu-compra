@@ -142,7 +142,8 @@ export class PerfilComponent implements OnInit {
       }
     });
     this.loaderService.loadingTrue()
-    this.statsData = await this.perfilService.getExpensesStats();
+    // this.statsData = await this.perfilService.getExpensesStats();
+    this.statsData = [150,40,140,120,50,80,10,99,100,75,43,454];
     this.loaderService.loadingFalse()
 
     this.data = {
