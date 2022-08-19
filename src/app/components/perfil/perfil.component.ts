@@ -88,7 +88,7 @@ export class PerfilComponent implements OnInit {
 
     this.showStarFav = false;
     this.username = '';
-    this.imgUrl = "../../../assets/svg/user-gray.svg"
+    this.imgUrl = "assets/svg/user-gray.svg"
     this.navbarService.showNavbar(true);
     this.placeholderDate = new Date();
     this.listaCargada = {
@@ -180,7 +180,7 @@ export class PerfilComponent implements OnInit {
       this.username = userInfo.user;
       this.imgUrl = userInfo.avatar;
     }
-    if (!this.imgUrl) this.imgUrl = "../../../assets/svg/user-gray.svg"
+    if (!this.imgUrl) this.imgUrl = "assets/svg/user-gray.svg"
 
   }
 

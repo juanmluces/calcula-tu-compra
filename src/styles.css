@@ -110,7 +110,7 @@ img {
 
 body {
   background-color: var(--primary-color);
-  background-image: url("/assets/images/fondo.jpg");
+  background-image: url("assets/images/fondo.jpg");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center;

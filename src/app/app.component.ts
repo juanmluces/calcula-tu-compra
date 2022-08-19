@@ -65,7 +65,7 @@ export class AppComponent implements OnInit, AfterViewChecked{
 
     this.showMobileNav = true;
     this.mobileNavOpened = false;
-    this.logoUrl = "../assets/svg/LOGO.svg";
+    this.logoUrl = "assets/svg/LOGO.svg";
     this.showPlusIcon = false;
   }
 
@@ -120,13 +120,13 @@ export class AppComponent implements OnInit, AfterViewChecked{
   checkWidthShowNavbar() {
     if (window.screen.width > 800) {
       this.showMobileNav = true;
-      this.logoUrl = '../assets/svg/LOGO.svg'
+      this.logoUrl = 'assets/svg/LOGO.svg'
 
     } else {
       if (!this.mobileNavOpened) {
         this.showMobileNav = false;
       }
-      this.logoUrl = "../assets/svg/solo-logo-color.svg"
+      this.logoUrl = "assets/svg/solo-logo-color.svg"
     }
   }
 

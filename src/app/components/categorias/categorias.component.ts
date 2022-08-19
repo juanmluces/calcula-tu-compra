@@ -36,7 +36,7 @@ export class CategoriasComponent implements OnInit {
     private loadigService: LoaderService
   ) {
 
-    this.categoryImage = '../../../assets/images/todos.jpg';
+    this.categoryImage = 'assets/images/todos.jpg';
     this.categories = []
     this.state = 'in'
 
@@ -51,7 +51,7 @@ export class CategoriasComponent implements OnInit {
 
   }
 
-  changeImage(pImageSrc = '../../../assets/images/todos.jpg') {
+  changeImage(pImageSrc = 'assets/images/todos.jpg') {
     if (pImageSrc != this.categoryImage) {
       this.state = 'out';
       setTimeout(() => {

@@ -83,7 +83,7 @@ export class ProductsComponent implements OnInit {
   checkEmptyImages() {
     this.productsToShow.products.forEach(product => {
       if (!product.imagen) {
-        product.imagen = "../../../assets/svg/placeholder.svg"
+        product.imagen = "assets/svg/placeholder.svg"
       }
     })
   }
