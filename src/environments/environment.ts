@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
- // apiUrl: "http://localhost:3000/"
-   apiUrl: "https://new-calcula-tu-compra.herokuapp.com/"
+  apiUrl: "http://localhost:3000/"
+  //apiUrl: "https://new-calcula-tu-compra.herokuapp.com/"
 };
 
 /*
